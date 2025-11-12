@@ -1,0 +1,156 @@
+{
+  "welcome": "Welcome",
+  "hello": "Hello",
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "start": "Start"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "pages": {
+    "inviteType": "Invite Type",
+    "birthday": "Birthday",
+    "wedding": "Wedding",
+    "graduation": "Graduation",
+    "party": "Party",
+    "sport": "Sport",
+    "host": "Host"
+  },
+  "landing": {
+    "hero": {
+      "welcomeTitle": "Welcome to Invitation",
+      "subtitle": "Meet the future of web applications",
+      "startButton": "Start"
+    },
+    "features": {
+      "fast": {
+        "title": "Fast and Modern",
+        "description": "Built with the latest technology for lightning-fast performance"
+      },
+      "secure": {
+        "title": "Security",
+        "description": "Your data is protected with industry-leading security measures"
+      },
+      "responsive": {
+        "title": "Responsive",
+        "description": "Works seamlessly across all devices and screen sizes"
+      }
+    },
+    "stats": {
+      "activeUsers": "Active Users",
+      "uptime": "Uptime",
+      "support": "Support"
+    }
+  },
+  "products": {
+    "wedding": {
+      "name": "Wedding",
+      "description": "Create beautiful wedding invitations for your special day"
+    },
+    "sport": {
+      "name": "Sport",
+      "description": "Design dynamic invitations for sports events and tournaments"
+    },
+    "party": {
+      "name": "Party",
+      "description": "Make your party invitations stand out with creative designs"
+    },
+    "birthday": {
+      "name": "Birthday",
+      "description": "Celebrate birthdays with personalized invitation cards"
+    },
+    "babyShower": {
+      "name": "Baby Shower",
+      "description": "Welcome the new arrival with adorable baby shower invitations"
+    },
+    "graduation": {
+      "name": "Graduation",
+      "description": "Commemorate academic achievements with elegant graduation invites"
+    },
+    "businessEvent": {
+      "name": "Business Event",
+      "description": "Professional invitations for corporate events and meetings"
+    },
+    "anniversary": {
+      "name": "Anniversary",
+      "description": "Celebrate milestones with beautiful anniversary invitations"
+    },
+    "holiday": {
+      "name": "Holiday",
+      "description": "Spread holiday cheer with festive seasonal invitations"
+    },
+    "housewarming": {
+      "name": "Housewarming",
+      "description": "Welcome guests to your new home with custom invitations"
+    }
+  },
+  "wedding": {
+    "title": "Create Your Wedding Invitation",
+    "subtitle": "Fill in the details to create a beautiful wedding invitation",
+    "sections": {
+      "coupleInfo": "Couple Information",
+      "dateTime": "Wedding Date & Time",
+      "venue": "Venue Information",
+      "additionalInfo": "Additional Information",
+      "contact": "Contact Information"
+    },
+    "bride": {
+      "title": "Bride",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter bride's full name",
+      "parentsNames": "Parents' Names",
+      "parentsNamesPlaceholder": "Mr. & Mrs. (optional)"
+    },
+    "groom": {
+      "title": "Groom",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter groom's full name",
+      "parentsNames": "Parents' Names",
+      "parentsNamesPlaceholder": "Mr. & Mrs. (optional)"
+    },
+    "dateTime": {
+      "date": "Wedding Date",
+      "time": "Wedding Time"
+    },
+    "venue": {
+      "ceremony": "Ceremony Venue",
+      "reception": "Reception Venue",
+      "venueName": "Venue Name",
+      "venueNamePlaceholder": "Enter venue name",
+      "address": "Address",
+      "addressPlaceholder": "Enter full address",
+      "sameAsceremony": "Same as ceremony"
+    },
+    "additional": {
+      "dressCode": "Dress Code",
+      "selectDressCode": "Select dress code",
+      "formal": "Formal",
+      "semiFormal": "Semi-Formal",
+      "cocktail": "Cocktail Attire",
+      "casual": "Casual",
+      "traditional": "Traditional",
+      "rsvpDeadline": "RSVP Deadline",
+      "website": "Wedding Website",
+      "specialInstructions": "Special Instructions",
+      "specialInstructionsPlaceholder": "Any special notes for guests (parking, gifts, etc.)"
+    },
+    "contact": {
+      "email": "Contact Email",
+      "phone": "Contact Phone"
+    },
+    "actions": {
+      "createInvitation": "Create Invitation",
+      "reset": "Reset Form"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Birthday
+    {{ $t('pages.birthday') }}
   </div>
 </template>
 

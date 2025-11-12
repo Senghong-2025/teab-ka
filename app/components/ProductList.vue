@@ -13,7 +13,7 @@
       </div>
      <div class="flex justify-center w-full mt-2">
         <button class="btn-primary w-full" @click="navigateTo(item.path)">
-          <span>Start</span>
+          <span>{{ $t('common.start') }}</span>
         </button>
      </div>
     </div>

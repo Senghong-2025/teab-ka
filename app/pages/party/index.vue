@@ -1,6 +1,6 @@
 <template>
   <div>
-    Party
+    {{ $t('pages.party') }}
   </div>
 </template>
 

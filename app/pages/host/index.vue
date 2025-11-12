@@ -1,6 +1,6 @@
 <template>
   <div>
-    Host
+    {{ $t('pages.host') }}
   </div>
 </template>
 

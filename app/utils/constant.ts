@@ -2,6 +2,7 @@ import type { IProductList } from "~/models/constant";
 
 export const productList: IProductList[] = [
   {
+    key: "wedding",
     name: "Wedding",
     path: "/wedding",
     description:
@@ -9,6 +10,7 @@ export const productList: IProductList[] = [
     icon: "lucide:heart",
   },
   {
+    key: "sport",
     name: "Sport",
     path: "/sport",
     description:
@@ -16,20 +18,23 @@ export const productList: IProductList[] = [
     icon: "lucide:football",
   },
   {
+    key: "party",
     name: "Party",
     path: "/party",
     description:
-      "Kick off the fun with vibrant, creative party invitations that capture your event’s vibe — whether it’s a casual get-together or a themed celebration. Choose from fun, festive, or elegant designs to match your mood.",
+      "Kick off the fun with vibrant, creative party invitations that capture your event's vibe — whether it's a casual get-together or a themed celebration. Choose from fun, festive, or elegant designs to match your mood.",
     icon: "lucide:party-popper",
   },
   {
+    key: "birthday",
     name: "Birthday",
     path: "/birthday",
     description:
-      "Make birthdays unforgettable with joyful and colorful invitations for all ages. From adorable kids’ parties to milestone celebrations, each design brings happiness and excitement to your special day.",
+      "Make birthdays unforgettable with joyful and colorful invitations for all ages. From adorable kids' parties to milestone celebrations, each design brings happiness and excitement to your special day.",
     icon: "lucide:cake",
   },
   {
+    key: "babyShower",
     name: "Baby Shower",
     path: "/baby-shower",
     description:
@@ -37,6 +42,7 @@ export const productList: IProductList[] = [
     icon: "lucide:baby",
   },
   {
+    key: "graduation",
     name: "Graduation",
     path: "/graduation",
     description:
@@ -44,20 +50,23 @@ export const productList: IProductList[] = [
     icon: "lucide:graduation-cap",
   },
   {
+    key: "businessEvent",
     name: "Business Event",
     path: "/business-event",
     description:
-      "Set a professional tone for your conferences, product launches, or networking events. Our business invitation designs balance style and clarity to reflect your brand’s identity and purpose.",
+      "Set a professional tone for your conferences, product launches, or networking events. Our business invitation designs balance style and clarity to reflect your brand's identity and purpose.",
     icon: "lucide:briefcase",
   },
   {
+    key: "anniversary",
     name: "Anniversary",
     path: "/anniversary",
     description:
-      "Honor your journey together with elegant anniversary invitations. Whether it’s your first year or golden jubilee, our designs bring warmth, love, and sophistication to your celebration.",
+      "Honor your journey together with elegant anniversary invitations. Whether it's your first year or golden jubilee, our designs bring warmth, love, and sophistication to your celebration.",
     icon: "lucide:gem",
   },
   {
+    key: "holiday",
     name: "Holiday",
     path: "/holiday",
     description:
@@ -65,6 +74,7 @@ export const productList: IProductList[] = [
     icon: "lucide:snowflake",
   },
   {
+    key: "housewarming",
     name: "Housewarming",
     path: "/housewarming",
     description:

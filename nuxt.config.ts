@@ -16,7 +16,19 @@ export default defineNuxtConfig({
       cloudinaryUploadPreset: ''
     }
   },
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/i18n'],
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+  i18n: {
+    locales: [
+      { code: 'en', language: 'en-US', file: 'en.json' },
+      { code: 'kh', language: 'km-KH', file: 'kh.json' }
+    ],
+    defaultLocale: 'kh',
+    langDir: 'locales',
+    strategy: 'no_prefix',
+  },
   vite: {
     plugins: [
       tailwindcss(),

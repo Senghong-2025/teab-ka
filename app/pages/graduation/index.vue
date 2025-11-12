@@ -1,6 +1,6 @@
 <template>
   <div>
-    Graduation
+    {{ $t('pages.graduation') }}
   </div>
 </template>
 

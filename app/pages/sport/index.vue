@@ -1,6 +1,6 @@
 <template>
   <div>
-    Sport
+    {{ $t('pages.sport') }}
   </div>
 </template>
 

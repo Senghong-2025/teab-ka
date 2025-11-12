@@ -5,12 +5,12 @@
       <div class="max-w-4xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-5xl py-5 lg:text-7xl font-bold bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 animate-fade-in">
-          សូមស្វាគមន៍មកកាន់ការអញ្ជើញ
+          {{ $t('landing.hero.welcomeTitle') }}
         </h1>
 
         <!-- Subheading -->
         <p class="text-xl lg:text-2xl text-gray-600 mb-12 animate-slide-up">
-          ជួបជាមួយអនាគតនៃគេហទំព័រកម្មវិធី
+          {{ $t('landing.hero.subtitle') }}
         </p>
 
         <!-- CTA Buttons -->
@@ -19,7 +19,7 @@
             class="px-8 py-4 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             @click="$router.push('/home')"
             >
-            ចាប់ផ្តើម
+            {{ $t('landing.hero.startButton') }}
           </button>
           <!-- <button class="px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold border-2 border-indigo-600 hover:bg-indigo-50 transition-all duration-300 hover:scale-105 shadow-lg">
             ស្វែងយល់បន្ថែម
@@ -36,9 +36,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-800 mb-4">លឿន និងទំនើប</h3>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('landing.features.fast.title') }}</h3>
           <p class="text-gray-600 leading-relaxed">
-            បង្កើតឡើងដោយបច្ចេកវិទ្យាថ្មីៗបំផុត សម្រាប់ដំណើរការរហ័ស និងបទពិសោធន៍អ្នកប្រើប្រាស់ពិសេស
+            {{ $t('landing.features.fast.description') }}
           </p>
         </div>
 
@@ -49,9 +49,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-800 mb-4">សុវត្ថិភាព</h3>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('landing.features.secure.title') }}</h3>
           <p class="text-gray-600 leading-relaxed">
-            សុវត្ថិភាពកម្រិតសហគ្រាស ជាមួយនឹងការរួមបញ្ចូល Firebase ដើម្បីរក្សាទិន្នន័យរបស់អ្នកឱ្យមានសុវត្ថិភាព
+            {{ $t('landing.features.secure.description') }}
           </p>
         </div>
 
@@ -62,9 +62,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-800 mb-4">ឆ្លើយតប</h3>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('landing.features.responsive.title') }}</h3>
           <p class="text-gray-600 leading-relaxed">
-            ចំណុចប្រទាក់ដែលរចនាយ៉ាងស្អាត ដែលដំណើរការយ៉ាងរលូននៅលើគ្រប់ឧបករណ៍ និងទំហំអេក្រង់
+            {{ $t('landing.features.responsive.description') }}
           </p>
         </div>
       </div>
@@ -75,15 +75,15 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div class="animate-fade-in">
               <div class="text-4xl lg:text-5xl font-bold text-indigo-600 mb-2">100+</div>
-              <div class="text-gray-600 font-medium">អ្នកប្រើប្រាស់សកម្ម</div>
+              <div class="text-gray-600 font-medium">{{ $t('landing.stats.activeUsers') }}</div>
             </div>
             <div class="animate-fade-in animation-delay-200">
               <div class="text-4xl lg:text-5xl font-bold text-purple-600 mb-2">99.9%</div>
-              <div class="text-gray-600 font-medium">ពេលវេលាប្រើប្រាស់</div>
+              <div class="text-gray-600 font-medium">{{ $t('landing.stats.uptime') }}</div>
             </div>
             <div class="animate-fade-in animation-delay-400">
               <div class="text-4xl lg:text-5xl font-bold text-pink-600 mb-2">24/7</div>
-              <div class="text-gray-600 font-medium">ការគាំទ្រ</div>
+              <div class="text-gray-600 font-medium">{{ $t('landing.stats.support') }}</div>
             </div>
           </div>
         </div>
