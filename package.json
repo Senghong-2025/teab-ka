@@ -8,7 +8,9 @@
     "prod": "nuxt dev --dotenv .env",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "build:prod": "npx nuxi build --preset=cloudflare_pages",
+    "deploy:prod": "npx wrangler pages deploy dist/"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.10.0",
