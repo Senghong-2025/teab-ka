@@ -1,16 +1,8 @@
 <template>
-  <div class="min-h-screen grid gap-2 items-center justify-center p-4 font-sans bg-linear-to-br from-[#fdf4f0] to-[#fef9e6]">
-
-        <!-- Card body -->
-    <div class="relative max-w-[380px] w-full p-10 px-8 bg-linear-to-br from-[#fffdf7] to-[#fef9f0] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300">
-      <div class="text-center mb-6">
-        <p class="text-sm text-amber-600 uppercase tracking-[0.15em] mb-2 animate-fade-in" style="animation-delay: 0.15s">Dear Guest</p>
-        <h3 class="font-khmer text-2xl font-bold text-amber-900 mb-1 animate-fade-in" style="animation-delay: 0.25s">{{ guestNameKhmer || 'លោកអ្នកជាទីគោរព' }}</h3>
-        <h3 class="font-serif text-xl font-semibold text-amber-800 animate-fade-in" style="animation-delay: 0.35s">{{ guestNameEnglish || 'Honored Guest' }}</h3>
-      </div>
-    </div>
+  <div class="min-h-screen grid gap-2 items-center p-2 justify-center font-sans bg-linear-to-br from-[#fdf4f0] to-[#fef9e6]">
+    <FirstPage/>
     <!-- Card body -->
-    <div class="relative w-[350px] max-w-full p-4 bg-linear-to-br from-[#fffdf7] to-[#fef9f0] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300" style="animation-delay: 0.2s">
+    <div class="relative max-w-full p-2 bg-linear-to-br from-[#fffdf7] to-[#fef9f0] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300" style="animation-delay: 0.2s">
       <header class="text-center mb-4">
         <p class="text-xs text-amber-700 uppercase tracking-[0.15em] mb-1 animate-fade-in" style="animation-delay: 0.5s">ក្នុងពិធីមង្គលការ · Wedding Ceremony</p>
         <h1 class="font-khmer text-4xl font-bold text-amber-900 my-2 animate-scale-in" style="animation-delay: 0.6s">ក្នុងពិធីមង្គលការ</h1>
@@ -157,6 +149,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import FirstPage from './two/FirstPage.vue'
 
 interface Props {
   guestNameKhmer?: string

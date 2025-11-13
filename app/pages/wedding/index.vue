@@ -206,7 +206,7 @@
           </div>
 
           <!-- Additional Information -->
-          <div class="space-y-6">
+          <!-- <div class="space-y-6">
             <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 flex items-center gap-2">
               <Info class="w-6 h-6 text-pink-500" />
               {{ $t('wedding.sections.additionalInfo') }}
@@ -264,7 +264,7 @@
                 :placeholder="$t('wedding.additional.specialInstructionsPlaceholder')"
               ></textarea>
             </div>
-          </div>
+          </div> -->
 
           <!-- Contact Information -->
           <div class="space-y-6">
@@ -326,7 +326,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Info, Phone, Send, RotateCcw } from 'lucide-vue-next';
+import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Phone, Send, RotateCcw } from 'lucide-vue-next';
 
 const { formData, handleSubmit, resetForm, getByHostId} = useWedding();
 

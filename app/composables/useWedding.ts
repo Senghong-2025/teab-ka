@@ -4,72 +4,29 @@ import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 export default function useWedding() {
 
     const { $db } = useNuxtApp();
-    const formData = ref<WeddingFormData>({
+
+    const createDefaultWeddingFormData = (): WeddingFormData => ({
         hostId: 100,
-        bride: {
-            fullName: '',
-            parentsNames: ''
-        },
-        groom: {
-            fullName: '',
-            parentsNames: ''
-        },
+        bride: { fullName: '', fullNameKh: '', parentsNames: '' },
+        groom: { fullName: '', fullNameKh: '', parentsNames: '' },
         weddingDate: '',
         weddingTime: '',
-        ceremony: {
-            venueName: '',
-            address: ''
-        },
-        reception: {
-            venueName: '',
-            address: ''
-        },
+        ceremony: { venueName: '', address: '', addressKh: '' },
+        reception: { venueName: '', address: '' },
         sameVenue: false,
         dressCode: '',
         rsvpDeadline: '',
         website: '',
         specialInstructions: '',
-        contact: {
-            phone: '',
-            email: '',
-        },
-        mapUrl: "",
-        coverPhoto: ""
+        contact: { phone: '', email: '' },
+        mapUrl: '',
+        coverPhoto: '',
     });
 
+    const formData = ref<WeddingFormData>(createDefaultWeddingFormData());
+
     const resetForm = () => {
-        formData.value = {
-            hostId: 100,
-            bride: {
-                fullName: '',
-                parentsNames: ''
-            },
-            groom: {
-                fullName: '',
-                parentsNames: ''
-            },
-            weddingDate: '',
-            weddingTime: '',
-            ceremony: {
-                venueName: '',
-                address: ''
-            },
-            reception: {
-                venueName: '',
-                address: ''
-            },
-            sameVenue: false,
-            dressCode: '',
-            rsvpDeadline: '',
-            website: '',
-            specialInstructions: '',
-            contact: {
-                phone: '',
-                email: '',
-            },
-            mapUrl: '',
-            coverPhoto: '',
-        };
+        formData.value = createDefaultWeddingFormData();
     };
 
     const getByHostId = async (hostId: number) => {
@@ -82,7 +39,6 @@ export default function useWedding() {
                 return null;
             }
 
-            // Return the first matching document
             const doc = querySnapshot.docs[0];
             if (!doc) {
                 return null;
