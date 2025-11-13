@@ -8,6 +8,7 @@ export const useStore = defineStore('app', {
       isAdmin: true,
       items: [],
       hasChanged: true,
+      user: {}
     }
   },
 })

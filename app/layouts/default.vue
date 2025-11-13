@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-gray-200">
+  <div class="bg-gray-300 default-layout">
     <Navbar v-if="!isHideNavbar"/>
-    <div class="min-h-[calc(100dvh-60px)]">
+    <div :class="!isHideNavbar ? 'min-h-[calc(100dvh-60px)]' : 'min-h-screen'">
       <slot />
     </div>
   </div>
@@ -12,7 +12,3 @@ import Navbar from '~/components/Navbar.vue';
 
 const { isHideNavbar } = useNavbar();
 </script>
-
-<style>
-
-</style>

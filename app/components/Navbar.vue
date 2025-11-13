@@ -19,6 +19,7 @@
       >
         {{ loc.name }}
       </button>
+      <button @click="onLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -34,6 +35,8 @@ const availableLocales = [
 function switchLanguage(newLocale: 'en' | 'kh') {
   setLocale(newLocale);
 }
+
+const { onLogout } = useAuthentication();
 </script>
 
 <style></style>

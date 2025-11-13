@@ -3,8 +3,7 @@ export default function useNavbar() {
     const isHideNavbar = computed(() => {
         return [
             '/',
-            '/auth/login',
-            '/auth/register',
+            '/auth',
             '/wedding/card/2'
         ].includes(route.path);
     });
