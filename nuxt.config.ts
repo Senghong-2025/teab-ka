@@ -29,6 +29,12 @@ export default defineNuxtConfig({
     langDir: 'locales',
     strategy: 'no_prefix',
   },
+  app: {
+    head: {
+      charset: 'utf-16',
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+    },
+  },
   vite: {
     plugins: [
       tailwindcss(),

@@ -17,6 +17,7 @@ useHead({
   meta: [
     { name: 'description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
 
+    { name: 'keywords', content: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation, ការអញ្ជើញ, សិរីសួស្ដី, havmk' },
     // Open Graph
     { property: 'og:title', content: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍' },
     { property: 'og:description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
@@ -25,7 +26,7 @@ useHead({
     { property: 'og:image:height', content: '630' },
     { property: 'og:url', content: `${siteUrl}${route.fullPath}` },
     { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'HAVMK Wedding Invitations' },
+    { property: 'og:site_name', content: 'HAVMK ហៅមក' },
 
     // Twitter
     { name: 'twitter:card', content: 'summary_large_image' },
