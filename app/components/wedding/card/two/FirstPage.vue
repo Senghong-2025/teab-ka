@@ -65,7 +65,7 @@
     height: 130px;
     right: -33px;
     z-index: 1000;
-    background-image: url(/_nuxt/assets/images/flow-1.png);
+    background-image: url('~/assets/images/flow-1.png');
     background-size: cover;
     background-repeat: no-repeat;
     transform: rotate(5deg);
@@ -80,7 +80,7 @@
     height: 130px;
     left: -50px;
     z-index: 1000;
-    background-image: url(/_nuxt/assets/images/flow-1.png);
+    background-image: url('~/assets/images/flow-1.png');
     background-size: cover;
     background-repeat: no-repeat;
     transform: rotate(193deg);
