@@ -23,7 +23,7 @@ const isReady = ref(false);
 onMounted(() => {
   setTimeout(() => {
     isReady.value = true;
-  }, 3000);
+  }, 500);
 })
 useHead({
   htmlAttrs: {

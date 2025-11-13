@@ -2,16 +2,15 @@
   <div class="min-h-screen grid gap-2 items-center p-2 justify-center font-sans bg-linear-to-br from-[#fdf4f0] to-[#fef9e6]">
     <FirstPage/>
     <!-- Card body -->
-    <div class="relative max-w-full p-2 bg-linear-to-br from-[#fffdf7] to-[#fef9f0] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300" style="animation-delay: 0.2s">
+    <div class="relative max-w-full p-2 bg-linear-to-br from-[#f0dea9] to-[#fccc74] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300" style="animation-delay: 0.2s">
       <header class="text-center mb-4">
-        <p class="text-xs text-amber-700 uppercase tracking-[0.15em] mb-1 animate-fade-in" style="animation-delay: 0.5s">ក្នុងពិធីមង្គលការ · Wedding Ceremony</p>
+        <!-- <p class="text-xs text-amber-700 uppercase tracking-[0.15em] mb-1 animate-fade-in" style="animation-delay: 0.5s">ក្នុងពិធីមង្គលការ · Wedding Ceremony</p> -->
         <h1 class="font-khmer text-4xl font-bold text-amber-900 my-2 animate-scale-in" style="animation-delay: 0.6s">ក្នុងពិធីមង្គលការ</h1>
         <h1 class="text-lg text-amber-700 m-0 animate-fade-in" style="animation-delay: 0.7s">The Wedding of</h1>
       </header>
 
       <section class="text-center mt-6">
         <div class="mb-4 animate-slide-in-left" style="animation-delay: 0.8s">
-          <p class="text-xs text-amber-600 uppercase tracking-wider mb-1">ភរិយា · Wife</p>
           <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ brideNameKhmer }}</h2>
           <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ brideNameEnglish }}</h2>
         </div>
@@ -22,7 +21,6 @@
         </div>
 
         <div class="mt-4 animate-slide-in-right" style="animation-delay: 1.1s">
-          <p class="text-xs text-amber-600 uppercase tracking-wider mb-1">ប្តី · Husband</p>
           <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ groomNameKhmer }}</h2>
           <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ groomNameEnglish }}</h2>
         </div>

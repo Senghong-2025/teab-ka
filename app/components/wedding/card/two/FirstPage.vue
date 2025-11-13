@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative max-w-[380px] w-full py-4 px-4 bg-linear-to-br from-[#fffdf7] to-[#fef9f0] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300">
+        class="relative max-w-[380px] w-full py-4 px-4 bg-linear-to-br from-[#f0dea9] to-[#fccc74] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300">
         <div class="text-center">
            <div class="flex justify-center items-center h-64 -mt-20">
             <svg viewBox="0 0 500 200" class="w-[500px] h-[400px]">
@@ -30,8 +30,8 @@
             <h3 class="font-serif text-xl font-semibold text-amber-800 animate-fade-in" style="animation-delay: 0.35s">
                 {{ 'Invitation' }}
             </h3>
-            <div class="text-amber-500 border-2 rounded-2xl border-amber-800 w-full min-h-[60px] text-center content-center">
-                <span>&&</span>
+            <div class="text-gray-200 text-[20px] bg-amber-800/20 font-medium border-2 rounded-2xl my-4 border-amber-200 w-full min-h-[60px] text-center content-center invite-name-box relative">
+                <span>បារមី និង រង្សី</span>
             </div>
         </div>
     </div>
@@ -52,5 +52,37 @@
 }
 .curved-text textPath {
   dominant-baseline: middle;
+}
+.invite-name-box {
+    position: relative;
+}
+.invite-name-box::after {
+    content: '';
+    position: absolute;
+    top: -78px;
+    right: 0;
+    width: 179px;
+    height: 130px;
+    right: -33px;
+    z-index: 1000;
+    background-image: url(/_nuxt/assets/images/flow-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(5deg);
+}
+
+.invite-name-box::before {
+    content: '';
+    position: absolute;
+    bottom: -72px;
+    right: 0;
+    width: 179px;
+    height: 130px;
+    left: -50px;
+    z-index: 1000;
+    background-image: url(/_nuxt/assets/images/flow-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotate(193deg);
 }
 </style>

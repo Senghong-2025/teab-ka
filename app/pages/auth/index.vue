@@ -1,7 +1,7 @@
 <template>
   <div class="grid place-content-center justify-center">
     <form class="w-[350px] bg-gray-200 rounded-md p-4 py-10 mt-[40%]"  @submit.prevent="onSubmit">
-      <div class="text-[20px] font-bold text-center">
+      <div class="text-[40px] text-indigo-500 font-bold text-center">
         {{ isLogin ? 'Login' : "Register" }}
       </div>
       <TheInputField

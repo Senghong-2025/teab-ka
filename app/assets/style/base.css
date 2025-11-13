@@ -1,5 +1,8 @@
 @import "./main.css";
 
-.btn-primary{
-    @apply px-2 py-1 bg-indigo-700 text-gray-200 rounded-sm cursor-pointer;
+.btn-primary {
+    @apply px-2 py-2 bg-indigo-700/90 text-gray-200 rounded-full cursor-pointer;
+}
+.btn-secodary {
+    @apply px-2 py-2 bg-amber-400/90 text-gray-200 rounded-full cursor-pointer;
 }
