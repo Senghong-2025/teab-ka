@@ -298,6 +298,27 @@
                   placeholder="+1 (555) 123-4567"
                 >
               </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ $t('wedding.google_map') }} <span class="text-red-500">*</span>
+                </label>
+                <input
+                  v-model="formData.mapUrl"
+                  type="link"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  placeholder="URL"
+                >
+                <div class="my-2 rounded-sm overflow-hidden">
+                  <a href="https://maps.app.goo.gl/E6AgL3bcyt1dqcG38" target="_blank" class="block w-full">
+                    <img 
+                      src="https://www.google.com/images/branding/product/2x/maps_96in128dp.png" 
+                      alt="Google Map" 
+                      class="w-full h-auto rounded-sm"
+                    >
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
