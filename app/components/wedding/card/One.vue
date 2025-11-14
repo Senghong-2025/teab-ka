@@ -261,13 +261,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { WeddingFormData } from '~/models/wedding';
+import type { IWeddingFormData } from '~/models/wedding';
 import useWedding from '~/composables/useWedding';
 
 const route = useRoute();
 const { getByHostId } = useWedding();
 
-const weddingData = ref<WeddingFormData | null>(null);
+const weddingData = ref<IWeddingFormData | null>(null);
 const loading = ref(true);
 const error = ref('');
 

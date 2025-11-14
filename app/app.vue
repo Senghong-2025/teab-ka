@@ -1,6 +1,6 @@
 <template>
   <div
-v-if="!isReady"
+    v-if="!isReady"
     class="min-h-screen w-full flex items-center justify-center bg-linear-to-br from-amber-300 via-orange-400 to-rose-500 relative overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
       <div class="absolute top-1/3 left-1/4 w-72 h-72 bg-white/20 rounded-full blur-3xl animate-pulse"/>
@@ -14,9 +14,11 @@ v-if="!isReady"
       HAVMK
     </span>
   </div>
-  <NuxtLayout v-else>
-    <NuxtPage />
-  </NuxtLayout>
+  <template v-else>
+    <NuxtLayout >
+      <NuxtPage />
+    </NuxtLayout>
+  </template>
 </template>
 <script lang="ts" setup>
 const isReady = ref(false);

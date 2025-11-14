@@ -3,6 +3,6 @@
 .btn-primary {
     @apply px-2 py-2 bg-indigo-700/90 text-gray-200 rounded-full cursor-pointer;
 }
-.btn-secodary {
+.btn-secondary {
     @apply px-2 py-2 bg-amber-400/90 text-gray-200 rounded-full cursor-pointer;
 }

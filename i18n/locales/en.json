@@ -152,5 +152,44 @@
       "createInvitation": "Create Invitation",
       "reset": "Reset Form"
     }
+  },
+  "Setting": "Setting",
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences and settings",
+    "sections": {
+      "account": "Account Settings",
+      "appearance": "Appearance",
+      "notifications": "Notifications",
+      "privacy": "Privacy & Security"
+    },
+    "account": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address"
+    },
+    "appearance": {
+      "theme": "Theme",
+      "language": "Language"
+    },
+    "notifications": {
+      "email": "Email Notifications",
+      "emailDesc": "Receive email updates about your invitations",
+      "push": "Push Notifications",
+      "pushDesc": "Get push notifications on your device",
+      "sms": "SMS Notifications",
+      "smsDesc": "Receive text message notifications"
+    },
+    "privacy": {
+      "profileVisibility": "Public Profile",
+      "profileVisibilityDesc": "Make your profile visible to others",
+      "showEmail": "Show Email",
+      "showEmailDesc": "Display email address on your public profile"
+    },
+    "actions": {
+      "save": "Save Changes",
+      "reset": "Reset"
+    }
   }
 }

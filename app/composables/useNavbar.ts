@@ -4,7 +4,7 @@ export default function useNavbar() {
         return [
             '/',
             '/auth',
-            '/wedding/card/2'
+            '/wedding/share/2'
         ].includes(route.path);
     });
 
