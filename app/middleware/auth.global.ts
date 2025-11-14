@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
   const cookie = useCookie('token') ?? null;
   const token = cookie.value;
-  if (!token && to.path !== '/auth' && to.path !== '/' && !to.path.includes('card/')) {
+  if (!token && to.path !== '/auth' && to.path !== '/' && !to.path.includes('share/')) {
     return navigateTo('/auth', {replace: true});
   }
 

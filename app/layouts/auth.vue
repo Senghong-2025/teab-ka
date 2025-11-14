@@ -1,5 +1,5 @@
 <template>
-    <div class="auth-layout">
+    <div class="auth-layout bg-linear-to-br from-amber-300 via-orange-400 to-rose-500">
         <slot />
     </div>
 </template>
@@ -11,7 +11,6 @@
 <style>
 .auth-layout {
     min-height: 100dvh;
-    background: url('https://www.shutterstock.com/image-illustration/modern-abstract-template-design-contemporary-600nw-2302582291.jpg') no-repeat center center;
     background-size: cover;
     width: 100%;
 }

@@ -213,6 +213,9 @@
           </button>
         </div>
       </div>
+      <button class="btn-secondary my-2 w-full" @click="onLogout">
+        <span class="text-red-600 font-medium">Logout</span>        
+      </button>
     </div>
   </div>
 </template>
@@ -221,6 +224,8 @@
 import { Settings, User, Palette, Bell, Shield, Save, RotateCcw, Sun, Moon, Monitor } from 'lucide-vue-next';
 
 const { locale, setLocale } = useI18n();
+
+const { onLogout } = useAuthentication();
 
 // Account Settings
 const accountSettings = ref({

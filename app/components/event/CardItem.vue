@@ -13,8 +13,8 @@
       data for testing and invite your guess
     </p>
     <div class="flex justify-end gap-2">
-      <button class="p-2 bg-gray-200 rounded-md"><SquarePen class="text-gray-400"/></button>
-      <button class="p-2 bg-gray-200 rounded-md"><Eye class="text-gray-400" /></button>
+      <button class="p-2 bg-gray-100 rounded-md"><SquarePen class="text-gray-400"/></button>
+      <button class="p-2 bg-gray-100 rounded-md"><Eye class="text-gray-400" /></button>
     </div>
   </div>
 </template>

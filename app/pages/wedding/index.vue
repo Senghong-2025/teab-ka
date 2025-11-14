@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="text-lg font-medium my-2 flex gap-2 items-center">
-      <p class="text-indigo-600">Event List</p>
+      <p class="text-indigo-600">Wedding List</p>
       <button class="bg-gray-200 rounded-md p-2 cursor-pointer" @click="navigateTo('/wedding/wedding-form')">
         <Plus class="text-indigo-500"/>
       </button>
