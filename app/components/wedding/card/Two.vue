@@ -148,6 +148,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import FirstPage from './two/FirstPage.vue'
+import useSound from '~/components/useSound'
 
 interface Props {
   guestNameKhmer?: string
@@ -242,8 +243,14 @@ const stopAutoSlide = () => {
   }
 }
 
+const { soundList } = useSound();
+const displaySound = () => {
+  const audio = new Audio(soundList[3]);
+  audio.play();
+};
 onMounted(() => {
-  startAutoSlide()
+  startAutoSlide();
+  displaySound();
 })
 
 onUnmounted(() => {
