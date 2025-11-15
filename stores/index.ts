@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
+import type { IUserResponse } from '~/models/auth';
 
 export const useStore = defineStore('app', {
   state: () => {
@@ -8,7 +10,12 @@ export const useStore = defineStore('app', {
       isAdmin: true,
       items: [],
       hasChanged: true,
-      user: {}
+      user: {} as IUserResponse
     }
   },
+  actions: {
+    setUser (user: any) {
+      this.user = user;
+    }
+  }
 })

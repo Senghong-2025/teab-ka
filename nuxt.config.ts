@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       cloudinaryUploadPreset: ''
     }
   },
-  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/i18n'],
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/device', '@element-plus/nuxt'],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },

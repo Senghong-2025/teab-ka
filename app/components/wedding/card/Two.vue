@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen grid gap-2 items-center p-2 justify-center font-sans bg-linear-to-br from-[#fdf4f0] to-[#fef9e6]">
-    <FirstPage/>
+    <FirstPage :invite="invite"/>
     <!-- Card body -->
     <div class="relative max-w-full p-2 bg-linear-to-br from-[#f0dea9] to-[#fccc74] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300" style="animation-delay: 0.2s">
       <header class="text-center mb-4">
@@ -11,8 +11,8 @@
 
       <section class="text-center mt-6">
         <div class="mb-4 animate-slide-in-left" style="animation-delay: 0.8s">
-          <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ brideNameKhmer }}</h2>
-          <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ brideNameEnglish }}</h2>
+          <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ data.bride?.fullNameKh }}</h2>
+          <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ data.bride?.fullName }}</h2>
         </div>
 
         <div class="animate-fade-in my-3" style="animation-delay: 1s">
@@ -21,8 +21,8 @@
         </div>
 
         <div class="mt-4 animate-slide-in-right" style="animation-delay: 1.1s">
-          <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ groomNameKhmer }}</h2>
-          <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ groomNameEnglish }}</h2>
+          <h2 class="font-khmer text-3xl font-bold text-amber-950 my-1">{{ data.groom?.fullNameKh }}</h2>
+          <h2 class="font-serif text-2xl font-bold text-amber-900 my-1">{{ data.groom?.fullName }}</h2>
         </div>
       </section>
 
@@ -127,19 +127,19 @@
         </div>
         <div class="text-sm text-amber-700 tracking-[0.1em] animate-fade-in" style="animation-delay: 1.6s">Saturday | 25 | May | 2025</div>
 
-        <p class="text-lg text-amber-950 my-3 animate-fade-in" style="animation-delay: 1.7s">{{ weddingTimeKhmer }} · {{ weddingTime }}</p>
+        <p class="text-lg text-amber-950 my-3 animate-fade-in" style="animation-delay: 1.7s">{{ data.weddingDate }} · {{ data.weddingTime }}</p>
 
         <div class="mt-6 animate-slide-in-up" style="animation-delay: 1.8s">
-          <p class="font-khmer text-lg font-bold text-amber-900">{{ venueKhmer }}</p>
-          <p class="font-serif text-xl font-bold text-amber-950">{{ venue }}</p>
+          <p class="font-khmer text-lg font-bold text-amber-900">{{ data.sameVenue }}</p>
+          <p class="font-serif text-xl font-bold text-amber-950">{{ data.sameVenue }}</p>
           <p class="text-xs text-amber-700 leading-[1.4] mt-1">
-            {{ venueAddress }}
+            {{ data.sameVenue }}
           </p>
         </div>
       </section>
 
       <footer class="mt-8 pt-4 border-t border-[#fde8d0] text-center animate-fade-in" style="animation-delay: 2s">
-        <p class="text-[0.8125rem] text-amber-950 font-medium my-1">{{ contactInfo }}</p>
+        <p class="text-[0.8125rem] text-amber-950 font-medium my-1">{{ data.contact?.email }}</p>
       </footer>
     </div>
   </div>
@@ -148,64 +148,19 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import FirstPage from './two/FirstPage.vue'
-import useSound from '~/components/useSound'
+import type { WeddingFormData } from '~/models/wedding'
+import type { IInviteMember } from '~/models/invite';
 
-interface Props {
-  guestNameKhmer?: string
-  guestNameEnglish?: string
-  groomNameKhmer?: string
-  groomNameEnglish?: string
-  brideNameKhmer?: string
-  brideNameEnglish?: string
-  weddingDate?: string | Date
-  weddingTime?: string
-  weddingTimeKhmer?: string
-  venue?: string
-  venueKhmer?: string
-  venueAddress?: string
-  contactInfo?: string
-  imageUrl?: string
-  imageUrls?: string[]
-  autoSlide?: boolean
-  slideInterval?: number
-}
+const props = defineProps<{data: WeddingFormData, invite: IInviteMember}>();
 
-const props = withDefaults(defineProps<Props>(), {
-  guestNameKhmer: '',
-  guestNameEnglish: '',
-  groomNameKhmer: 'សុខ សុវណ្ណា',
-  groomNameEnglish: 'Sok Sovanna',
-  brideNameKhmer: 'រ៉ា សុជាតិ',
-  brideNameEnglish: 'Ra Socheata',
-  weddingDate: '2025-05-25',
-  weddingTime: '9:00 AM',
-  weddingTimeKhmer: 'ម៉ោង ៩:០០ ព្រឹក',
-  venue: 'Sovannaraj Villa',
-  venueKhmer: 'វីឡា សុវណ្ណរាជ',
-  venueAddress: 'ផ្ទះលេខ ៤០១, សង្កាត់ទួលទំពាំង, ខណ្ឌចំការមន, ភ្នំពេញ',
-  contactInfo: '012 345 678 | engagement@sokreach.com',
-  imageUrl: 'https://images.pexels.com/photos/19126424/pexels-photo-19126424.jpeg?cs=srgb&dl=pexels-hanuman-photo-studio-564865561-19126424.jpg&fm=jpg',
-  imageUrls: () => [
-    'https://i.pinimg.com/474x/87/c0/95/87c0954d9a30df14848ac03f1e2641c3.jpg',
-    'https://i.pinimg.com/736x/d5/16/bc/d516bc8ce09abb8e3455d62c4324a66a.jpg',
-    'https://images.pexels.com/photos/19126424/pexels-photo-19126424.jpeg?cs=srgb&dl=pexels-hanuman-photo-studio-564865561-19126424.jpg&fm=jpg',
-    'https://i.pinimg.com/474x/87/c0/95/87c0954d9a30df14848ac03f1e2641c3.jpg',
-    'https://i.pinimg.com/736x/d5/16/bc/d516bc8ce09abb8e3455d62c4324a66a.jpg',
-],
-  autoSlide: true,
-  slideInterval: 4000
-})
-
-// Image slider state
 const currentImageIndex = ref(0)
 let autoSlideTimer: NodeJS.Timeout | null = null
 
-// Computed images array - use imageUrls if provided, otherwise fallback to single imageUrl
 const images = computed(() => {
-  if (props.imageUrls && props.imageUrls.length > 0) {
-    return props.imageUrls
+  if (props.data.photoPreview && props.data?.photoPreview?.length > 0) {
+    return props.data.photoPreview
   }
-  return [props.imageUrl]
+  return [props.data.coverPhoto]
 })
 
 // Navigation functions
@@ -230,9 +185,10 @@ const resetAutoSlide = () => {
 }
 
 // Auto-slide functionality
+const autoSlide = true;
 const startAutoSlide = () => {
-  if (props.autoSlide && images.value.length > 1) {
-    autoSlideTimer = setInterval(nextImage, props.slideInterval)
+  if (autoSlide) {
+    autoSlideTimer = setInterval(nextImage, 3000)
   }
 }
 
@@ -243,19 +199,17 @@ const stopAutoSlide = () => {
   }
 }
 
-const { soundList } = useSound();
-const displaySound = () => {
-  const audio = new Audio(soundList[3]);
-  audio.play();
-};
+// const { playSound } = useSound();
+
 onMounted(() => {
   startAutoSlide();
-  displaySound();
+  // playSound(3);
 })
 
 onUnmounted(() => {
   stopAutoSlide()
 })
+
 </script>
 
 <style scoped>

@@ -14,14 +14,14 @@
     </p>
     <div class="flex justify-end gap-2">
       <button class="p-2 bg-gray-100 rounded-md"><SquarePen class="text-gray-400"/></button>
-      <button class="p-2 bg-gray-100 rounded-md"><Eye class="text-gray-400" /></button>
+      <button class="p-2 bg-gray-100 rounded-md" @click="navigateTo({path: '/wedding/details', query: { event_id: data.id , type: 2 }})"><Ellipsis class="text-gray-400" /></button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { WeddingFormData } from '~/models/wedding';
-import { Eye, SquarePen } from 'lucide-vue-next';
+import { Ellipsis, SquarePen } from 'lucide-vue-next';
 
 defineProps<{data: WeddingFormData}>()
 

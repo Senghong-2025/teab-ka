@@ -10,8 +10,10 @@
       <span>Getting data...</span>
     </div>
     <template v-else>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3">
-        <CardItem :data="weddingData" />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div v-for="(data, index) in weddingData" :key="index">
+          <CardItem :data="data" />
+        </div>
       </div>
     </template>
   </div>
@@ -20,10 +22,12 @@
 <script lang="ts" setup>
 import CardItem from '~/components/event/CardItem.vue';
 import { Plus } from 'lucide-vue-next';
+import { useStore } from '~~/stores';
 
 const { getByHostId, weddingData, isLoading } = useWedding();
+const store = useStore();
 onMounted( async () => {
-  getByHostId(100)
+  await getByHostId(String(store.user.random_id));
 })
 </script>
 

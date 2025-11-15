@@ -22,10 +22,16 @@
 </template>
 <script lang="ts" setup>
 const isReady = ref(false);
-onMounted(() => {
-  setTimeout(() => {
-    isReady.value = true;
-  }, 500);
+
+const { getUserById } = useAuthentication();
+const isToken = useCookie('token').value;
+onMounted(async () => {
+  if (isToken) {
+    await getUserById();
+  }
+  isReady.value = true;
+  // setTimeout(() => {
+  // }, 500);
 })
 useHead({
   htmlAttrs: {

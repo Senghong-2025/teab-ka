@@ -1,6 +1,6 @@
 export interface IWeddingFormData {
   id?: string;
-  hostId: number,
+  hostId: number | string,
   bride: {
     fullName: string;
     fullNameKh: string;
@@ -40,7 +40,7 @@ export interface IWeddingFormData {
 
 export class WeddingFormData implements IWeddingFormData {
   id: string;
-  hostId: number;
+  hostId: number | string;
   bride: { fullName: string; fullNameKh: string; parentsNames: string; parentsNamesKh?: string };
   groom: { fullName: string; fullNameKh: string; parentsNames: string; parentsNamesKh?: string };
   weddingDate: string;

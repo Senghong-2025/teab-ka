@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 py-8 px-4">
+  <div class="min-h-screen bg-linear-to-br from-pink-50 via-white to-purple-50 py-8 px-4">
     <div class="max-w-4xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-8">
@@ -205,67 +205,6 @@
             </div>
           </div>
 
-          <!-- Additional Information -->
-          <!-- <div class="space-y-6">
-            <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 flex items-center gap-2">
-              <Info class="w-6 h-6 text-pink-500" />
-              {{ $t('wedding.sections.additionalInfo') }}
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ $t('wedding.additional.dressCode') }}
-                </label>
-                <select
-                  v-model="formData.dressCode"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                >
-                  <option value="">{{ $t('wedding.additional.selectDressCode') }}</option>
-                  <option value="formal">{{ $t('wedding.additional.formal') }}</option>
-                  <option value="semi-formal">{{ $t('wedding.additional.semiFormal') }}</option>
-                  <option value="cocktail">{{ $t('wedding.additional.cocktail') }}</option>
-                  <option value="casual">{{ $t('wedding.additional.casual') }}</option>
-                  <option value="traditional">{{ $t('wedding.additional.traditional') }}</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ $t('wedding.additional.rsvpDeadline') }}
-                </label>
-                <input
-                  v-model="formData.rsvpDeadline"
-                  type="date"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                >
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ $t('wedding.additional.website') }}
-              </label>
-              <input
-                v-model="formData.website"
-                type="url"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                placeholder="https://www.example.com"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                {{ $t('wedding.additional.specialInstructions') }}
-              </label>
-              <textarea
-                v-model="formData.specialInstructions"
-                rows="4"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                :placeholder="$t('wedding.additional.specialInstructionsPlaceholder')"
-              ></textarea>
-            </div>
-          </div> -->
-
           <!-- Contact Information -->
           <div class="space-y-6">
             <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 flex items-center gap-2">
@@ -322,6 +261,25 @@
               </div>
             </div>
           </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              {{ $t('Preview Photos') }} <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="file"
+              accept="image/jpeg, image/png"
+              multiple
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              placeholder="Preview Image"
+              @change="handleFileChange"
+            >
+            <div v-if="previewFiles.length" class="my-2 rounded-md overflow-hidden bg-gray-100 flex gap-2 flex-wrap">
+              <div v-for="item in previewFiles" :key="item" class="w-[200px] h-[200px] overflow-hidden">
+                <img :src="item" alt="" class="w-full h-full object-contain">
+              </div>
+            </div>
+          </div>
 
           <!-- Submit Buttons -->
           <div class="flex gap-4 pt-6">
@@ -350,9 +308,25 @@
 <script lang="ts" setup>
 import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Phone, Send, RotateCcw } from 'lucide-vue-next';
 
-const { formData, handleSubmit, resetForm, getByHostId} = useWedding();
+const { formData, handleSubmit, resetForm, getByHostId, preveiwImageFiles,
+} = useWedding();
 
 onMounted(() => getByHostId(100));
+
+const previewFiles = ref<string[]>([]);
+const handleFileChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.files) {
+    const files = Array.from(target.files);
+    previewFiles.value = [];
+    files.forEach(file => {
+      const url = URL.createObjectURL(file);
+      previewFiles.value.push(url);
+    });
+    preveiwImageFiles.value = files
+    console.log('Preview URLs:', previewFiles.value);
+  }
+};
 </script>
 
 <style scoped>

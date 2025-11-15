@@ -97,6 +97,7 @@
   "wedding": {
     "title": "Create Your Wedding Invitation",
     "subtitle": "Fill in the details to create a beautiful wedding invitation",
+    "google_map": "Google Map",
     "sections": {
       "coupleInfo": "Couple Information",
       "dateTime": "Wedding Date & Time",

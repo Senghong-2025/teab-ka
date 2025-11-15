@@ -7,7 +7,7 @@
       v-model="model" 
       :type="type"
       :required="required"
-    />
+    >
   </div>
 </template>
 
@@ -15,7 +15,7 @@
 const props = defineProps<{
   label: string
   modelValue: string
-  type: 'text' | 'number' | 'let' | 'email' | 'password'
+  type: 'text' | 'number' | 'tel' | 'email' | 'password'
   required?: boolean
 }>()
 

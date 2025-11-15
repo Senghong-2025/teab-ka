@@ -1,19 +1,25 @@
 <template>
   <div>
-    <CardTwo v-if="$route.params.id === String(2)"/>
-    <CardOne v-else/>
+    <CardTwo
+      v-if="formType === 2"
+      :data="weddingDetails"
+      :invite="invite"
+    />
+    <div v-else> 
+      <span>No Found !!!</span>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import CardTwo from '~/components/wedding/card/Two.vue';
-import CardOne from '~/components/wedding/card/One.vue';
+// import CardOne from '~/components/wedding/card/One.vue';
 
 const route = useRoute();
 const siteUrl = 'https://havmk.pages.dev'; // Replace with your actual domain
 
 useHead({
-  title: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍',
+  // title: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍',
   meta: [
     { name: 'description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
 
@@ -37,9 +43,12 @@ useHead({
 })
 
 
+const {getWeddingDetails, weddingDetails } = useWedding();
+const weddingId = computed(() => String(route.query.event_id));
+const formType = computed(() => Number(route.query.type));
+const invite = JSON.parse(atob(String(route.query.to)));
 onMounted(() => {
-  const encodedRoute = btoa(route.fullPath) 
-  console.log("Shareable link:", `${window.location.origin}/redirect?route=${encodedRoute}`)
+  getWeddingDetails(weddingId.value);
 });
 </script>
 
