@@ -149,9 +149,8 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import FirstPage from './two/FirstPage.vue'
 import type { WeddingFormData } from '~/models/wedding'
-import type { IInviteMember } from '~/models/invite';
 
-const props = defineProps<{data: WeddingFormData, invite: IInviteMember}>();
+const props = defineProps<{data: WeddingFormData, invite: string}>();
 
 const currentImageIndex = ref(0)
 let autoSlideTimer: NodeJS.Timeout | null = null

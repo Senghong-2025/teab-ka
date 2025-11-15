@@ -31,7 +31,7 @@
                 {{ 'Invitation' }}
             </h3>
             <div class="text-gray-200 text-[20px] bg-amber-800/20 font-medium border-2 rounded-2xl my-4 border-amber-200 w-full min-h-[60px] text-center content-center invite-name-box relative">
-                <span>{{ invite.title }}</span>
+                <span>{{ invite }}</span>
             </div>
         </div>
     </div>
@@ -39,9 +39,8 @@
 
 <script lang="ts" setup>
 import { Heart } from 'lucide-vue-next';
-import type { IInviteMember } from '~/models/invite';
 
-defineProps<{invite: IInviteMember}>();
+defineProps<{invite: string}>();
 </script>
 
 <style scoped>

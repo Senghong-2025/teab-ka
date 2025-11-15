@@ -1,11 +1,7 @@
 <template>
   <div>
-    <CardTwo
-      v-if="formType === 2"
-      :data="weddingDetails"
-      :invite="invite"
-    />
-    <div v-else> 
+    <CardTwo v-if="formType === String(2)" :data="weddingDetails" :invite="invite ?? ''" />
+    <div v-else>
       <span>No Found !!!</span>
     </div>
   </div>
@@ -43,15 +39,17 @@ useHead({
 })
 
 
-const {getWeddingDetails, weddingDetails } = useWedding();
-const weddingId = computed(() => String(route.query.event_id));
-const formType = computed(() => Number(route.query.type));
-const invite = JSON.parse(atob(String(route.query.to)));
+const { getWeddingDetails, weddingDetails } = useWedding();
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const weddingId = urlParams.get('event_id');
+const formType = urlParams.get('type');
+const invite = urlParams.get('to')?.toString();
+
 onMounted(() => {
-  getWeddingDetails(weddingId.value);
+  getWeddingDetails(String(weddingId));
 });
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       NODE_ENV: import.meta.env.NODE_ENV,
       API_KEY: import.meta.env.API_KEY,
       API_URL: import.meta.env.API_URL,
+      SECRET_KEY: import.meta.env.SECRET_KEY,
       cloudinaryCloudName: '',
       cloudinaryUploadPreset: ''
     }

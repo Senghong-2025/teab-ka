@@ -48,6 +48,8 @@ const emit = defineEmits<{
   (e: "delete", id: string): Promise<void>
 }>();
 
+const { t } = useI18n();
+
 const onClickDelete = (id?: string) => {
   isShowDialog.value = true;
   inviteId.value = id;
@@ -58,14 +60,19 @@ const onCofirmDelete = async () => {
   isShowDialog.value = false;
 }
 
+
 const onClickPreviewSend = async (invite: IInviteMember) => {
-  const encoded = btoa(JSON.stringify(invite));
-  const url = `/wedding/share?event_id=${invite.eventId}&type=2&to=${encoded}`;
+ const params = new URLSearchParams({
+    event_id: String(invite.eventId),
+    type: "2",
+    to: invite.title
+  });
+
+  const url = `/wedding/share?${params.toString()}`;
   if (navigator.share) {
     try {
       await navigator.share({
-        title: 'Wedding Invitation',
-        text: 'You are invited! Click below:',
+        title: t('Wedding Invitation'),
         url
       });
     } catch (err) {
