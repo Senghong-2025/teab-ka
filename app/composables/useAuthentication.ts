@@ -39,8 +39,7 @@ export default function useAuthentication() {
       useCookie('token').value = token;
       useCookie('user_id').value = response.user.uid;
       await getUserById();
-      navigateTo('/home');
-
+      window.location.href = '/home'; 
     } catch (error) {
       throw new Error(`Create account error: ${error}`);
     } finally {
@@ -57,7 +56,7 @@ export default function useAuthentication() {
       useCookie('token').value = token;
       useCookie('user_id').value = response.user.uid;
       await getUserById();
-      navigateTo('/home');
+      window.location.href = '/home'; 
       return response;
     } catch (error) {
       throw new Error(`Login error: ${error}`);

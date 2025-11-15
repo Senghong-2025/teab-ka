@@ -82,3 +82,13 @@ export const productList: IProductList[] = [
     icon: "lucide:home",
   },
 ];
+
+
+export const formCode = [
+  "A1B2C3",
+  "D4E5F6",
+  "G7H8I9",
+  "J1K2L3",
+  "M4N5O6",
+  "P7Q8R9"
+];

@@ -2,10 +2,7 @@
   <div class="space-y-2">
     <div v-for="(invite, index) in inviteList" :key="index" class="bg-gray-200/50 p-4 rounded-md flex justify-between">
       <span>{{ invite.title }}</span>
-      <div class="space-x-2">
-        <button>
-          <Copy :size="20" class="text-gray-400"/>
-        </button>
+      <div class="space-x-4">
         <button @click="onClickPreviewSend(invite)">
           <Send :size="20" class="text-indigo-500"/>
         </button>
@@ -14,8 +11,8 @@
         </button>
       </div>
     </div>
-    <div v-if="!inviteList || inviteList.length === 0" class="text-center py-8 text-gray-500">
-      No invites yet. Click the + button to add members.
+    <div v-if="!inviteList || inviteList.length === 0" class="text-center content-center w-full h-[60px] rounded-md text-gray-600 bg-gray-200">
+      <span>{{ $t('Getting') }}</span>
     </div>
     <BaseDialog v-model:is-show-dialog="isShowDialog">
       <div class="text-center my-6 flex items-center gap-2 justify-center">
@@ -35,7 +32,7 @@
 import type { IInviteMember } from '~/models/invite';
 import BaseButton from '~/components/common/BaseButton.vue';
 import BaseDialog from '~/components/common/BaseDialog.vue';
-import { TriangleAlert,Trash, Send, Copy } from 'lucide-vue-next';
+import { TriangleAlert,Trash, Send } from 'lucide-vue-next';
 
 const isShowDialog = ref(false);
 defineProps<{

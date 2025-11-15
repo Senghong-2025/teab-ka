@@ -19,9 +19,9 @@
     <!-- Content -->
     <InviteList :invite-list="inviteList" :is-loading="isLoading" @delete="deleteInviteMember" />
 
-    <BaseDialog v-model:is-show-dialog="isDialogVisible" title="Add new member">
+    <BaseDialog v-model:is-show-dialog="isDialogVisible" title="Invite new member">
       <form @submit.prevent="createInviteMember">
-        <TheInputField v-model="inviteModel.title" label="Title" type="text" required />
+        <TheInputField v-model="inviteModel.title" :label="$t('Invite To')" type="text" required />
         <div class="border-b border-gray-300 my-2" />
         <div class="flex justify-end">
           <BaseButton name="Submit" type="btn-primary" :is-loading="isLoading" />
