@@ -61,7 +61,6 @@ const onCofirmDelete = async () => {
 const onClickPreviewSend = async (invite: IInviteMember) => {
   const encoded = btoa(JSON.stringify(invite));
   const url = `/wedding/share?event_id=${invite.eventId}&type=2&to=${encoded}`;
-  window.open(url, "_blank");
   if (navigator.share) {
     try {
       await navigator.share({
