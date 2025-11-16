@@ -55,7 +55,7 @@ export default function useAuthentication() {
       const token = await result.user.getIdToken();
       useCookie('token').value = token;
       useCookie('user_id').value = response.user.uid;
-      await getUserById();
+      await getUserById(result.user.uid);
       window.location.href = '/home'; 
       return response;
     } catch (error) {
@@ -80,9 +80,9 @@ export default function useAuthentication() {
     navigateTo('/');
   };
 
-  const getUserById = async () => {
+  const getUserById = async (id?: string) => {
     const userCollection = collection($db, "users");
-    const q = query(userCollection, where('id', '==', useCookie("user_id").value));
+    const q = query(userCollection, where('id', '==', id ? id : useCookie('user_id').value));
     const querySnapshot = (await getDocs(q));
     querySnapshot.docs.map((doc) => {
       const data = doc.data();

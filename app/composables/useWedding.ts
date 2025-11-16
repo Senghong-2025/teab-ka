@@ -1,14 +1,13 @@
 import { type IWeddingFormData, WeddingFormData } from './../models/wedding';
-import { collection, addDoc, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, doc, getDoc, updateDoc } from 'firebase/firestore';
 import type { ICloudinaryUploadResponse } from '~/models/upload';
-// import useApi from "@/composables/useApi";
 import { useStore } from '~~/stores';
 
 export default function useWedding() {
 
     const { $db } = useNuxtApp();
     const store = useStore();
-    const isLoading = ref(false);
+    const { setLoading, isLoading } = useLoading();
     const { uploadMulitpleImages } = useApi();
     const preveiwImageFiles = ref<File[]>([]);
     const createDefaultWeddingFormData = (): IWeddingFormData => ({
@@ -37,7 +36,7 @@ export default function useWedding() {
 
     const weddingData = ref<WeddingFormData[]>([]);
     const getByHostId = async (hostId: string | number): Promise<IWeddingFormData[]> => {
-        isLoading.value = true;
+        setLoading('getHost', true);
         try {
             const weddingCollection = collection($db, 'wedding');
             const q = query(weddingCollection, where('hostId', '==', String(hostId)));
@@ -58,7 +57,7 @@ export default function useWedding() {
             console.error(`Error fetching wedding for hostId ${hostId}:`, error);
             throw error;
         } finally {
-            isLoading.value = false;
+            setLoading('getHost', false);
         }
     };
 
@@ -69,7 +68,7 @@ export default function useWedding() {
             const weddingDocSnap = await getDoc(weddingDocRef);
            if (!weddingDocSnap.exists()) {
             console.log("No such document!");
-            return null; // Return null if the document doesn't exist
+            return null;
             }
 
             const result = {
@@ -92,28 +91,55 @@ export default function useWedding() {
             return response.data;
         } catch (error) {
             console.error("Upload Error:", error);
-            return [];
+            throw new Error("Update image error");
         }
     };
 
+    const route = useRoute();
+    const isEdit = computed(() => route.query.edit === "true");
+    const weddingId = computed(() => route.query.i as string);
     const handleSubmit = async () => {
+        setLoading("update", true);
         try {
-            const weddingCollection = collection($db, 'wedding');
-            // Create new wedding invitation
             const uploads = await handleUpdateImages();
-            formData.value.photoPreview = uploads.map((item) => item.url);
-            const response = await addDoc(weddingCollection, {
-                ...formData.value,
-                createdAt: new Date().toISOString()
-            });
-            console.log('Wedding invitation created with ID:', response.id);
-            resetForm();
-            return response;
+            if (!Array.isArray(formData.value.photoPreview)) {
+                formData.value.photoPreview = [];
+            }
+            formData.value.photoPreview.push(
+                ...uploads.map(item => item.url)
+            );
+
+            // Update wedding event
+            if (isEdit.value && weddingId.value) {
+                const weddingRef = doc($db, "wedding", weddingId.value);
+                await updateDoc(weddingRef, {
+                    ...formData.value,
+                    updatedAt: new Date().toISOString()
+                });
+                navigateTo("/wedding");
+            }
+            // Create new wedding invitation
+            else {
+                const weddingCollection = collection($db, 'wedding');
+                const response = await addDoc(weddingCollection, {
+                    ...formData.value,
+                    createdAt: new Date().toISOString()
+                });
+                console.log('Wedding invitation created with ID:', response.id);
+                resetForm();
+                navigateTo('/wedding');
+            }
         } catch (error) {
             console.error('Error creating wedding invitation:', error);
-            throw error;
+        } finally {
+            setLoading("update", false);
         }
     };
+
+    const onClickEdit = async (id: string) => {
+        navigateTo({path: "/wedding/wedding-form", query: {i:  id, edit: "true" }});
+    }
+
     return {
         formData,
         resetForm,
@@ -126,5 +152,10 @@ export default function useWedding() {
         handleUpdateImages,
         getWeddingDetails,
         weddingDetails,
+        onClickEdit,
+        isEdit,
+        weddingId,
+        $db,
+        setLoading,
     }
 };

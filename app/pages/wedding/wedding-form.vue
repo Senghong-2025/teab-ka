@@ -1,6 +1,9 @@
 <template>
   <div class="min-h-screen bg-linear-to-br from-pink-50 via-white to-purple-50 py-8 px-4">
-    <div class="max-w-4xl mx-auto">
+    <div v-if="isLoading('getEdit')">
+      <span>Getting data to edit...</span>
+    </div>
+    <div v-else class="max-w-4xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-8">
         <div class="flex justify-center mb-4">
@@ -224,7 +227,7 @@
                   rows="2"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   :placeholder="$t('wedding.venue.addressPlaceholder')"
-                ></textarea>
+                />
               </div>
             </div>
           </div>
@@ -285,43 +288,103 @@
               </div>
             </div>
           </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-              {{ $t('Preview Photos') }} <span class="text-red-500">*</span>
-            </label>
+          <!-- Photo Upload Section -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <label class="block text-sm font-medium text-gray-700">
+                {{ $t('Preview Photos') }} <span v-if="!isEdit" class="text-red-500">*</span>
+              </label>
+              <span class="text-xs text-gray-500">
+                {{ totalImages }} / 5 photos
+              </span>
+            </div>
+
+            <!-- Hidden file input -->
             <input
+              ref="fileInput"
               type="file"
-              accept="image/jpeg, image/png"
+              accept="image/jpeg, image/png, image/webp"
               multiple
-              required
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-              placeholder="Preview Image"
+              :required="!isEdit && totalImages === 0"
+              class="hidden"
               @change="handleFileChange"
             >
-            <div v-if="previewFiles.length" class="my-2 rounded-md overflow-hidden bg-gray-100 flex gap-2 flex-wrap">
-              <div v-for="item in previewFiles" :key="item" class="w-[200px] h-[200px] overflow-hidden">
-                <img :src="item" alt="" class="w-full h-full object-contain">
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-3">
+              <!-- Existing uploaded photos -->
+              <div
+                v-for="(item, index) in formData.photoPreview"
+                :key="`existing-${index}`"
+                class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-sm hover:shadow-md transition-all duration-200"
+              >
+                <img
+                  :src="item"
+                  alt="Wedding photo"
+                  class="w-full h-full object-cover"
+                >
+                <!-- Remove button -->
+                <button
+                  type="button"
+                  class="absolute top-1 right-1 p-1.5 bg-red-500 text-white rounded-full opacity-100 md:opacity-0 md:group-hover:opacity-100 hover:bg-red-600 transition-all duration-200 shadow-lg"
+                  @click="removeExistingPhoto(index)"
+                >
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
+
+              <!-- New preview photos -->
+              <div
+                v-for="(item, index) in previewFiles"
+                :key="`new-${index}`"
+                class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 shadow-sm hover:shadow-md transition-all duration-200"
+              >
+                <img
+                  :src="item"
+                  alt="Wedding photo preview"
+                  class="w-full h-full object-cover"
+                >
+                <!-- Remove button -->
+                <button
+                  type="button"
+                  class="absolute top-1 right-1 p-1.5 bg-red-500 text-white rounded-full opacity-100 md:opacity-0 md:group-hover:opacity-100 hover:bg-red-600 transition-all duration-200 shadow-lg"
+                  @click="removePreviewPhoto(index)"
+                >
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Add Photo Button -->
+              <button
+                v-if="totalImages < 5"
+                type="button"
+                class="aspect-square rounded-lg border-2 border-dashed border-gray-300 hover:border-pink-400 bg-gray-50 hover:bg-pink-50 transition-all duration-200 flex flex-col items-center justify-center gap-1 group"
+                @click="triggerFileInput"
+              >
+                <svg class="w-8 h-8 text-gray-400 group-hover:text-pink-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span class="text-xs text-gray-500 group-hover:text-pink-600 font-medium">Add</span>
+              </button>
             </div>
+
+            <!-- Help text -->
+            <p v-if="totalImages < 5" class="text-xs text-gray-500">
+              Click the + button to add photos (JPEG, PNG, WebP • Max 5 photos)
+            </p>
+            <p v-else class="text-xs text-amber-600 font-medium">
+              Maximum of 5 photos reached. Remove a photo to add another.
+            </p>
           </div>
 
           <!-- Submit Buttons -->
           <div class="flex gap-4 pt-6">
-            <button
-              type="submit"
-              class="flex-1 bg-linear-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
-            >
-              <Send class="w-5 h-5" />
-              {{ $t('wedding.actions.createInvitation') }}
-            </button>
-            <button
-              type="button"
-              class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200 flex items-center justify-center gap-2"
-              @click="resetForm"
-            >
-              <RotateCcw class="w-5 h-5" />
-              {{ $t('wedding.actions.reset') }}
-            </button>
+            <BaseButton :name="isEdit ? 'Update' : 'Save'" class="w-full" type="btn-primary" :is-loading="isLoading('update')"/>
+            <BaseButton name="Bank" class="w-full" type="btn-info" @click="navigateTo('/wedding')"/>
           </div>
         </form>
       </div>
@@ -330,27 +393,114 @@
 </template>
 
 <script lang="ts" setup>
-import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Phone, Send, RotateCcw } from 'lucide-vue-next';
+import { doc, getDoc } from 'firebase/firestore';
+import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Phone } from 'lucide-vue-next';
+import type { WeddingFormData } from '~/models/wedding';
+import BaseButton from '~/components/common/BaseButton.vue';
 
-const { formData, handleSubmit, resetForm, getByHostId, preveiwImageFiles,
+const { 
+  formData,
+  handleSubmit,
+  preveiwImageFiles,
+  isEdit,
+  weddingId,
+  $db,
+  setLoading,
+  isLoading,
 } = useWedding();
 
-onMounted(() => getByHostId(100));
-
 const previewFiles = ref<string[]>([]);
+const fileInput = ref<HTMLInputElement | null>(null);
+
+// Calculate total images
+const totalImages = computed(() => {
+  const existingCount = formData.value.photoPreview?.length || 0;
+  const newCount = previewFiles.value.length;
+  return existingCount + newCount;
+});
+
+const triggerFileInput = () => {
+  fileInput.value?.click();
+};
+
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files) {
     const files = Array.from(target.files);
-    previewFiles.value = [];
-    files.forEach(file => {
-      const url = URL.createObjectURL(file);
-      previewFiles.value.push(url);
+    const remainingSlots = 5 - totalImages.value;
+
+    if (remainingSlots <= 0) {
+      alert('Maximum of 5 photos allowed');
+      return;
+    }
+
+    // Limit files to remaining slots
+    const filesToAdd = files.slice(0, remainingSlots);
+
+    // Filter valid image files
+    const validFiles = filesToAdd.filter(file => {
+      const isValidType = ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
+      const isValidSize = file.size <= 10 * 1024 * 1024; // 10MB
+
+      if (!isValidType) {
+        alert(`${file.name} is not a valid image type`);
+      }
+      if (!isValidSize) {
+        alert(`${file.name} exceeds 10MB limit`);
+      }
+
+      return isValidType && isValidSize;
     });
-    preveiwImageFiles.value = files
-    console.log('Preview URLs:', previewFiles.value);
+
+    if (validFiles.length > 0) {
+      validFiles.forEach(file => {
+        const url = URL.createObjectURL(file);
+        previewFiles.value.push(url);
+      });
+
+      const existingFiles = preveiwImageFiles.value || [];
+      preveiwImageFiles.value = [...existingFiles, ...validFiles];
+
+      if (filesToAdd.length > remainingSlots) {
+        alert(`Only ${remainingSlots} photo(s) added due to 5 photo limit`);
+      }
+    }
+
+    // Reset input
+    target.value = '';
   }
 };
+
+const removePreviewPhoto = (index: number) => {
+  const url = previewFiles.value[index];
+  if (url) {
+    URL.revokeObjectURL(url);
+  }
+  previewFiles.value.splice(index, 1);
+
+  if (preveiwImageFiles.value) {
+    preveiwImageFiles.value.splice(index, 1);
+  }
+};
+
+const removeExistingPhoto = (index: number) => {
+  if (formData.value.photoPreview) {
+    formData.value.photoPreview.splice(index, 1);
+  }
+};
+
+onMounted(async () => {
+  setLoading('getEdit', true);
+  if (isEdit.value && weddingId.value) {
+    const docRef = doc($db, 'wedding', String(weddingId.value));
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      formData.value = docSnap.data() as WeddingFormData;
+    }
+  }
+  setLoading("getEdit", false);
+});
 </script>
 
 <style scoped>

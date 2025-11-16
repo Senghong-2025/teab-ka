@@ -14,3 +14,8 @@
 button {
     @apply cursor-pointer;
 }
+
+:root {
+    --share-bg1: #ffc310eb;
+    --share-bg2: #25d7ffeb;
+}

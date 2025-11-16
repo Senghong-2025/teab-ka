@@ -1,28 +1,36 @@
 <template>
   <div class="space-y-2">
-    <div v-for="(invite, index) in inviteList" :key="index" class="bg-gray-200/50 p-4 rounded-md flex justify-between">
+    <div v-for="(invite, index) in inviteList" :key="index" class="bg-gray-100 p-4 rounded-md flex justify-between items-center">
       <span>{{ invite.title }}</span>
-      <div class="space-x-4">
+      <div class="flex gap-3">
         <button @click="onClickPreviewSend(invite)">
-          <Send :size="20" class="text-indigo-500"/>
+          <Send :size="20" class="text-indigo-500" />
         </button>
-        <button  @click="onClickDelete(invite.id)">
-          <Trash :size="20" class="text-red-400"/>
+        <button @click="onClickDelete(invite.id)">
+          <Trash :size="20" class="text-red-400" />
         </button>
       </div>
     </div>
-    <div v-if="!inviteList || inviteList.length === 0" class="text-center content-center w-full h-[60px] rounded-md text-gray-600 bg-gray-200">
+
+    <!-- Loading state -->
+    <div v-if="isLoading && (!inviteList || inviteList.length === 0)" class="text-center py-8 text-gray-600">
       <span>{{ $t('Getting') }}</span>
     </div>
+
+    <!-- Empty state -->
+    <div v-else-if="!inviteList || inviteList.length === 0" class="text-center py-8 text-gray-500">
+      <span>{{ $t('No invitations yet') }}</span>
+    </div>
+
     <BaseDialog v-model:is-show-dialog="isShowDialog">
       <div class="text-center my-6 flex items-center gap-2 justify-center">
         <TriangleAlert :size="20" class="text-yellow-500" />
-        <span>Are you want to delete this member ?</span>
+        <span>Are you sure you want to delete this member?</span>
       </div>
       <div class="border-b my-2" />
-      <div class="flex justify-end gap-2">  
-        <BaseButton name="No" :is-loading="isLoading" @click="isShowDialog = false"/>
-        <BaseButton name="Yes" type="btn-primary" :is-loading="isLoading" @click="onCofirmDelete"/>
+      <div class="flex justify-end gap-2">
+        <BaseButton name="No" :is-loading="isLoading" @click="isShowDialog = false" />
+        <BaseButton name="Yes" type="btn-primary" :is-loading="isLoading" @click="onCofirmDelete" />
       </div>
     </BaseDialog>
   </div>
@@ -59,10 +67,12 @@ const onCofirmDelete = async () => {
 
 
 const onClickPreviewSend = async (invite: IInviteMember) => {
- const params = new URLSearchParams({
+  const inviteBgColor = localStorage.getItem('inviteBgColor');
+  const params = new URLSearchParams({
     event_id: String(invite.eventId),
     type: "2",
-    to: invite.title
+    to: invite.title,
+    bc: String(inviteBgColor)
   });
 
   const url = `/wedding/share?${params.toString()}`;

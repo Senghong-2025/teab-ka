@@ -4,10 +4,10 @@
       <span>{{ data?.bride?.fullName }}</span> & <span>{{ data?.groom?.fullName }}</span>
     </h3>
     <div class="flex items-center text-sm text-gray-500 mb-3">
-      <svg 
+      <svg
         xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
         stroke="currentColor">
-        <path 
+        <path
           stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
@@ -21,9 +21,7 @@
         <Loader v-if="isLoading(`delete${data.id}`)" class="animate-spin" :size="16" />
         <Trash v-else class="text-red-400" />
       </button>
-      <button
-        class="p-2 bg-gray-100 rounded-md"
-        @click="navigateTo({ path: '/wedding/wedding-form', query: { is_edit: 'true' } })">
+      <button class="p-2 bg-gray-100 rounded-md" @click="$emit('edit', data.id)">
         <SquarePen class="text-blue-400" />
       </button>
       <button
@@ -39,16 +37,13 @@
 import type { WeddingFormData } from '~/models/wedding';
 import { Ellipsis, SquarePen, Trash, Loader } from 'lucide-vue-next';
 
-defineProps<{ 
+defineProps<{
   data: WeddingFormData
   isLoading: (key: string) => boolean
- }>()
+}>()
 
-
-defineEmits<{
-  (e: "delete", id: string): void
-}>();
-
+type TEmit = (e: "delete" | "edit", id: string) => void;
+defineEmits<TEmit>();
 
 </script>
 

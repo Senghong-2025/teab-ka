@@ -6,7 +6,7 @@
         <Plus class="text-indigo-500"/>
       </button>
     </div>
-    <div v-if="isLoading">
+    <div v-if="isLoading('getHost')">
       <span>Getting data...</span>
     </div>
     <template v-else>
@@ -16,6 +16,7 @@
             :data="data"
             :is-loading="isEventLoading"
             @delete="onDeleteEvent"
+            @edit="onClickEdit"
           />
         </div>
       </div>
@@ -28,7 +29,7 @@ import CardItem from '~/components/event/CardItem.vue';
 import { Plus } from 'lucide-vue-next';
 import { useStore } from '~~/stores';
 
-const { getByHostId, weddingData, isLoading } = useWedding();
+const { getByHostId, weddingData, isLoading, onClickEdit } = useWedding();
 const { onDeleteEvent, isEventLoading } = useEventSetting();
 
 const store = useStore();
