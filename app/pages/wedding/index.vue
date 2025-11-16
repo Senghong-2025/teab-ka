@@ -12,7 +12,11 @@
     <template v-else>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
         <div v-for="(data, index) in weddingData" :key="index">
-          <CardItem :data="data" />
+          <CardItem
+            :data="data"
+            :is-loading="isEventLoading"
+            @delete="onDeleteEvent"
+          />
         </div>
       </div>
     </template>
@@ -25,6 +29,8 @@ import { Plus } from 'lucide-vue-next';
 import { useStore } from '~~/stores';
 
 const { getByHostId, weddingData, isLoading } = useWedding();
+const { onDeleteEvent, isEventLoading } = useEventSetting();
+
 const store = useStore();
 onMounted( async () => {
   await getByHostId(String(store.user.random_id));

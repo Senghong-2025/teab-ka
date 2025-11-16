@@ -81,6 +81,6 @@ export class WeddingFormData implements IWeddingFormData {
   }
 
   get weddingDateForDisplay(){
-    return formatDatetimeDisplay(this.weddingDate)
+    return dateTimeForDisplayKhmer(this.weddingDate);
   }
 }

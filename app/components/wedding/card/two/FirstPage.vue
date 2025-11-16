@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative max-w-[380px] w-full py-4 px-4 bg-linear-to-br from-[#f0dea9] to-[#fccc74] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300">
+        class="relative max-w-[400px] w-full py-4 px-4 bg-linear-to-br from-[#f0dea9] to-[#fccc74] rounded-3xl shadow-[0_20px_40px_rgba(180,140,80,0.2)] border border-[#fde8d0] animate-fade-in-up hover:shadow-[0_25px_50px_rgba(180,140,80,0.3)] transition-all duration-300">
         <div class="text-center">
            <div class="flex justify-center items-center h-64 -mt-20">
             <svg viewBox="0 0 500 200" class="w-[500px] h-[400px]">

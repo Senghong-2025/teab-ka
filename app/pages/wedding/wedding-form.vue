@@ -34,10 +34,22 @@
                 </h3>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ $t('wedding.bride.fullName') }} <span class="text-red-500">*</span>
+                    {{ $t("Full Name EN") }}  <span class="text-red-500">*</span>
                   </label>
                   <input
                     v-model="formData.bride.fullName"
+                    type="text"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    :placeholder="$t('wedding.bride.fullNamePlaceholder')"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ $t("Full Name KH") }} <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    v-model="formData.bride.fullNameKh"
                     type="text"
                     required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
@@ -65,13 +77,25 @@
                 </h3>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">
-                    {{ $t('wedding.groom.fullName') }} <span class="text-red-500">*</span>
+                    {{ $t("Full Name EN") }} <span class="text-red-500">*</span>
                   </label>
                   <input
                     v-model="formData.groom.fullName"
                     type="text"
                     required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    :placeholder="$t('wedding.groom.fullNamePlaceholder')"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">
+                    {{ $t("Full Name KH") }} <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    v-model="formData.groom.fullNameKh"
+                    type="text"
+                    required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                     :placeholder="$t('wedding.groom.fullNamePlaceholder')"
                   >
                 </div>
