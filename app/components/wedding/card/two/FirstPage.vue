@@ -4,20 +4,20 @@
         :style="{ backgroundColor: bg }"
         >
         <div class="text-center">
-            <span class="text-[30px] text-amber-600 font-moul">សិរីសួស្ដីអាពាហ៍ពិពាហ៍</span>
+            <span class="text-[30px] font-moul" :style="{ color: textColor }">សិរីសួស្ដីអាពាហ៍ពិពាហ៍</span>
             <div class="flex justify-center items-center">
-              <span class="text-[30px] text-amber-800 font-moul">{{event?.bride?.fullNameKh.at(0)}}</span>
+              <span class="text-[30px] font-moul" :style="{ color: textColor }">{{event?.bride?.fullNameKh.at(0)}}</span>
               <div class="w-20 h-auto">
                 <img src="../../../../assets/images/heart.png" class="w-full h-full object-center" alt="">
               </div>
-              <span class="text-[30px] text-amber-800 font-moul">{{event?.groom?.fullNameKh.at(0)}}</span>
+              <span class="text-[30px] font-moul" :style="{ color: textColor }">{{event?.groom?.fullNameKh.at(0)}}</span>
             </div>
             <h3
-                class="font-khmer text-2xl font-bold text-amber-600 mb-1 animate-fade-in"
-                style="animation-delay: 0.25s">
+                class="font-khmer text-2xl font-bold mb-1 animate-fade-in"
+                :style="{ color: textColor, animationDelay: '0.25s' }">
                 {{ 'សូមគោរពអញ្ជើញ' }}
             </h3>
-            <h3 class="font-imperial text-xl font-semibold text-amber-600 animate-fade-in" style="animation-delay: 0.35s">
+            <h3 class="font-imperial text-xl font-semibold animate-fade-in" :style="{ color: textColor, animationDelay: '0.35s' }">
                 {{ 'Invitation' }}
             </h3>
             <div class="text-gray-200 text-[20px] bg-amber-800/20 font-medium border-2 rounded-2xl my-4 border-amber-200 w-full min-h-[60px] text-center content-center invite-name-box relative">
@@ -32,6 +32,7 @@ import type { WeddingFormData } from '~/models/wedding';
 
 defineProps<{invite: string, event:WeddingFormData}>();
 const bg = useShareBackground();
+const textColor = useShareTextColor();
 </script>
 
 <style scoped>

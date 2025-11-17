@@ -153,6 +153,23 @@
       "reset": "កំណត់ឡើងវិញ"
     }
   },
+  "Back": "ថយក្រោយ",
+  "Invited Member": "សមាជិកអញ្ជើញ",
+  "Setup Card": "រៀបចំកាត",
+  "Invite new member": "អញ្ជើញសមាជិកថ្មី",
+  "Invite To": "អញ្ជើញទៅ",
+  "Submit": "ដាក់ស្នើ",
+  "Card Type:": "ប្រភេទកាត:",
+  "Card 1": "កាត ១",
+  "Card 2": "កាត ២",
+  "Card Color:": "ពណ៌កាត:",
+  "Text Color:": "ពណ៌អក្សរ:",
+  "No": "លេខរៀង",
+  "Guest": "ភ្ញៀវ",
+  "Action": "សកម្មភាព",
+  "Getting data..": "កំពុងទាញយកទិន្នន័យ..",
+  "Are you sure you want to delete this member?": "តើអ្នកប្រាកដថាចង់លុបសមាជិកនេះមែនទេ?",
+  "Yes": "បាទ/ចាស",
   "Setting": "ការកំណត់",
   "settings": {
     "title": "ការកំណត់",

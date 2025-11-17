@@ -154,6 +154,23 @@
       "reset": "Reset Form"
     }
   },
+  "Back": "Back",
+  "Invited Member": "Invited Member",
+  "Setup Card": "Setup Card",
+  "Invite new member": "Invite new member",
+  "Invite To": "Invite To",
+  "Submit": "Submit",
+  "Card Type:": "Card Type:",
+  "Card 1": "Card 1",
+  "Card 2": "Card 2",
+  "Card Color:": "Card Color:",
+  "Text Color:": "Text Color:",
+  "No": "No",
+  "Guest": "Guest",
+  "Action": "Action",
+  "Getting data..": "Getting data..",
+  "Are you sure you want to delete this member?": "Are you sure you want to delete this member?",
+  "Yes": "Yes",
   "Setting": "Setting",
   "settings": {
     "title": "Settings",

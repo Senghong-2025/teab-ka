@@ -1,7 +1,7 @@
 <template>
-    <button :class="[type || 'btn-info', {'cursor-not-allowed! opacity-50': isLoading }]" class="flex gap-1 items-center justify-center" :disabled="isLoading" >
+    <button :class="[type || 'btn-info', {'cursor-not-allowed! opacity-50': isLoading }]" class="flex gap-1 items-center justify-center whitespace-nowrap" :disabled="isLoading" >
         <Loader v-if="isLoading" class="animate-spin" :size="16" />
-        <span>{{ name }}</span>
+        <div>{{ name }}</div>
     </button>
 </template>
 

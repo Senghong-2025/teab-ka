@@ -1,5 +1,14 @@
 @import "./main.css";
 
+@layer base {
+  html {
+    font-size: 12px;
+  }
+  body {
+    font-size: 12px;
+  }
+}
+
 .btn-info {
     @apply px-2 py-2 bg-gray-300/90 text-gray-800 rounded-full cursor-pointer min-w-20;
 }

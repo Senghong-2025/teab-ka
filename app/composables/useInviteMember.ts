@@ -44,6 +44,7 @@ export default function useInviteMember() {
             setLoading("create", false);
             if (!hasError) {
                 isDialogVisible.value = false;
+                inviteModel.title = "";
             }
         }
     };

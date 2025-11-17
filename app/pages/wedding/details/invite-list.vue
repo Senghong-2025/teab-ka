@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto text-[12px]">
       <table class="w-full border-collapse bg-gray-100">
         <thead>
           <tr class="bg-gray-200 text-gray-500">
-            <th class="border border-gray-300 px-4 py-2 text-left">Number</th>
-            <th class="border border-gray-300 px-4 py-2 text-left">Invite Name</th>
-            <th class="border border-gray-300 px-4 py-2 text-center">Action</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">{{ $t('No') }}</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">{{ $t('Guest') }}</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">{{ $t('Action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -14,11 +14,11 @@
             <td class="border border-gray-300 px-4 py-2">{{ index + 1 }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ invite.title }}</td>
             <td class="border border-gray-300 px-4 py-2">
-              <div class="flex gap-3 justify-center">
+              <div class="flex gap-3 justify-center items-center">
                 <button @click="onClickPreviewSend(invite)">
                   <Send :size="20" class="text-indigo-500" />
                 </button>
-               <input type="checkbox" style="width: 16px;" :checked="invite.isInvited" @change="onUpdateIsInvited(invite.id, !invite.isInvited)">
+               <input type="checkbox" class="shrink-0" style="width: 16px; height: 16px;" :checked="invite.isInvited" @change="onUpdateIsInvited(invite.id, !invite.isInvited)">
                 <button @click="onClickDelete(invite.id)">
                   <Trash :size="20" class="text-red-400" />
                 </button>
@@ -37,12 +37,12 @@
     <BaseDialog v-model:is-show-dialog="model">
       <div class="text-center my-6 flex items-center gap-2 justify-center">
         <TriangleAlert :size="20" class="text-yellow-500" />
-        <span>Are you sure you want to delete this member?</span>
+        <span>{{ $t('Are you sure you want to delete this member?') }}</span>
       </div>
       <div class="border-b my-2" />
       <div class="flex justify-end gap-2">
-        <BaseButton name="No" @click="model = false" />
-        <BaseButton name="Yes" type="btn-primary" :is-loading="isLoading(`delete${inviteId}`)" @click="$emit('delete', inviteId)" />
+        <BaseButton :name="$t('No')" @click="model = false" />
+        <BaseButton :name="$t('Yes')" type="btn-primary" :is-loading="isLoading(`delete${inviteId}`)" @click="$emit('delete', inviteId)" />
       </div>
     </BaseDialog>
   </div>
@@ -73,6 +73,7 @@ const model = computed({
 });
 
 const { t } = useI18n();
+const { inviteCardColor } = useColors();
 
 const onClickDelete = (id?: string) => {
   model.value = true;
@@ -85,12 +86,11 @@ const onUpdateIsInvited = (id: string | undefined, isInvited: boolean) => {
 };
 
 const onClickPreviewSend = async (invite: IInviteMember) => {
-  const inviteCardColor = localStorage.getItem('inviteCardColor');
   const params = new URLSearchParams({
     event_id: String(invite.eventId),
     type: "2",
     to: invite.title,
-    bc: String(inviteCardColor)
+    bc: inviteCardColor.value
   });
 
   const url = `/wedding/share?${params.toString()}`;

@@ -8,23 +8,23 @@
       :style="{backgroundColor: bg }"
     >
       <header class="text-center mb-4">
-        <h1 class="font-khmer text-4xl font-bold text-amber-900 my-2 animate-scale-in" style="animation-delay: 0.6s">ក្នុងពិធីមង្គលការ</h1>
-        <h1 class="text-lg text-amber-700 m-0 animate-fade-in font-imperial" style="animation-delay: 0.7s">The Wedding of</h1>
+        <h1 class="font-khmer text-4xl font-bold my-2 animate-scale-in" :style="{ color: textColor, animationDelay: '0.6s' }">ក្នុងពិធីមង្គលការ</h1>
+        <h1 class="text-lg m-0 animate-fade-in font-imperial" :style="{ color: textColor, animationDelay: '0.7s' }">The Wedding of</h1>
       </header>
 
       <section class="text-center mt-4">
         <div class="mb-4 animate-slide-in-left" style="animation-delay: 0.8s">
-          <h2 class="font-khmer text-3xl font-bold text-amber-800 my-1">{{ data.bride?.fullNameKh }}</h2>
-          <h2 class="font-serif text-2xl font-bold text-amber-800 my-1 font-imperial">{{ data.bride?.fullName }}</h2>
+          <h2 class="font-khmer text-3xl font-bold my-1" :style="{ color: textColor }">{{ data.bride?.fullNameKh }}</h2>
+          <h2 class="font-serif text-2xl font-bold my-1 font-imperial" :style="{ color: textColor }">{{ data.bride?.fullName }}</h2>
         </div>
 
         <div class="animate-fade-in my-3" style="animation-delay: 1s">
-          <span class="text-[1.75rem] text-amber-700 mx-2">&amp;</span>
+          <span class="text-[1.75rem] mx-2" :style="{ color: textColor }">&amp;</span>
         </div>
 
         <div class="mt-4 animate-slide-in-right" style="animation-delay: 1.1s">
-          <h2 class="font-khmer text-3xl font-bold text-amber-800 my-1">{{ data.groom?.fullNameKh }}</h2>
-          <h2 class="font-serif text-2xl font-bold text-amber-800 my-1 font-imperial">{{ data.groom?.fullName }}</h2>
+          <h2 class="font-khmer text-3xl font-bold my-1" :style="{ color: textColor }">{{ data.groom?.fullNameKh }}</h2>
+          <h2 class="font-serif text-2xl font-bold my-1 font-imperial" :style="{ color: textColor }">{{ data.groom?.fullName }}</h2>
         </div>
       </section>
     
@@ -41,7 +41,7 @@
       <!-- End Description -->
 
       <footer class="mt-8 pt-4 border-t border-[#fde8d0] text-center animate-fade-in" style="animation-delay: 2s">
-        <p class="text-[0.8125rem] text-amber-950 font-medium my-1">{{ data.contact?.email }}</p>
+        <p class="text-[0.8125rem] font-medium my-1" :style="{ color: textColor }">{{ data.contact?.email }}</p>
       </footer>
     </div>
   </div>
@@ -55,6 +55,7 @@ import PhotoSlider from '../PhotoSlider.vue';
 
 defineProps<{data: WeddingFormData, invite: string}>();
 const bg = useShareBackground();
+const textColor = useShareTextColor();
 </script>
 
 <style scoped>

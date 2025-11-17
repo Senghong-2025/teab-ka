@@ -1,16 +1,30 @@
 <template>
     <div>
         <div class="text-gray-800 text-[20px] p-4 bg-gray-100 rounded-md my-2 items-center gap-2 flex justify-between">
-            <div>
+            <div class="text-[12px] grid">
+                <div class="flex items-center gap-4">
+                    <span>{{ $t('Card Type:') }}</span>
+
+                    <label class="flex items-center gap-1">
+                        <input v-model="selectedCard" type="radio" value="1" >
+                        {{ $t('Card 1') }}
+                    </label>
+
+                    <label class="flex items-center gap-1">
+                        <input v-model="selectedCard" type="radio" value="2" >
+                        {{ $t('Card 2') }}
+                    </label>
+                </div>
                 <div class="flex gap-1 items-center">
-                    <p class="w-full">Card Color:</p>
+                    <p>{{ $t('Card Color:') }}</p>
                     <input v-model="cardColor" type="color" @input="onCardColorChange">
                 </div>
                 <div class="flex gap-1 items-center">
-                    <p class="w-full">Text Color:</p>
+                    <p>{{ $t('Text Color:') }}</p>
                     <input v-model="textColor" type="color" @input="onTextColorChange">
                 </div>
             </div>
+            
             <button class="text-red-500 p-2 rounded-md bg-gray-200" @click="resetColors">
                 <RefreshCcw :size="20" class="text-red-400" />
             </button>
@@ -26,8 +40,8 @@ import { RefreshCcw } from 'lucide-vue-next';
 
 const router = useRouter();
 const route = useRoute();
-const cardColor = ref(localStorage.getItem('inviteCardColor') || '#ffc310eb');
-const textColor = ref(localStorage.getItem('inviteTextColor') || '#000000');
+const { inviteCardColor: cardColor, inviteTextColor: textColor, onRemoveWeddingCardColor } = useColors();
+const selectedCard = ref(2);
 
 onMounted(() => {
     router.replace({
@@ -46,7 +60,6 @@ const onCardColorChange = () => {
             bc: cardColor.value,
         }
     });
-    localStorage.setItem('inviteCardColor', cardColor.value);
 };
 
 const onTextColorChange = () => {
@@ -56,14 +69,10 @@ const onTextColorChange = () => {
             tc: textColor.value,
         }
     });
-    localStorage.setItem('inviteTextColor', textColor.value);
 };
 
 const resetColors = () => {
-    cardColor.value = "#ffc310eb";
-    textColor.value = "#000000";
-    localStorage.setItem("inviteCardColor", cardColor.value);
-    localStorage.setItem("inviteTextColor", textColor.value);
+    onRemoveWeddingCardColor();
     router.replace({
         query: {
             ...route.query,
@@ -116,4 +125,6 @@ const sampleData = {
 } as WeddingFormData;
 </script>
 
-<style></style>
+<style scoped>
+/* .share-bg-btn {} */
+</style>
