@@ -4,6 +4,7 @@
     :invite-list="inviteList"
     :is-loading="isLoading"
     @delete="deleteInviteMember"
+    @update-is-invited="updateIsInvited"
   />
 </template>
 
@@ -16,6 +17,7 @@ const {
   isLoading,
   deleteInviteMember,
   confirmDeleteVisible,
+  updateIsInvited,
 } = useInviteMember();
 
 onMounted(() => {

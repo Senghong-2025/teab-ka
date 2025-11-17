@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where, updateDoc } from "firebase/firestore";
 import type { IInviteMember } from "~/models/invite";
 
 const inviteList = ref<IInviteMember[]>([]);
@@ -56,12 +56,26 @@ export default function useInviteMember() {
             ...item.data()
             }) as IInviteMember);
             inviteList.value = data;
-            console.log("New", inviteList.value);
         } catch (error) {
             console.error("Get Invite error", error);
         }
         setLoading("get", false);
     };
+
+    const updateIsInvited = async (id: string, isInvited: boolean) => {
+        setLoading(`update${id}`, true);
+        console.log('TEST');
+        try {
+            const inviteDocRef = doc($db, "weddingInvite", id);
+            await updateDoc(inviteDocRef, { isInvited });
+            await getInviteByEventId();
+        } catch (error) {
+            console.error("Update isInvited error:", error);
+        } finally {
+            setLoading(`update${id}`, false);
+        }
+    };
+
     return {
         isDialogVisible,
         inviteModel,
@@ -71,5 +85,6 @@ export default function useInviteMember() {
         inviteList,
         deleteInviteMember,
         confirmDeleteVisible,
+        updateIsInvited,
     }
 }

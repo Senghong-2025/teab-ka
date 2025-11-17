@@ -18,6 +18,7 @@
                 <button @click="onClickPreviewSend(invite)">
                   <Send :size="20" class="text-indigo-500" />
                 </button>
+               <input type="checkbox" style="width: 16px;" :checked="invite.isInvited" @change="onUpdateIsInvited(invite.id, !invite.isInvited)">
                 <button @click="onClickDelete(invite.id)">
                   <Trash :size="20" class="text-red-400" />
                 </button>
@@ -63,6 +64,7 @@ const inviteId = ref();
 const emit = defineEmits<{
   (e: "delete", id: string): void
   (e: "update:dialogModel", val: boolean): void
+  (e: "updateIsInvited", id: string, isInvited: boolean): void
 }>();
 
 const model = computed({
@@ -76,6 +78,11 @@ const onClickDelete = (id?: string) => {
   model.value = true;
   inviteId.value = id;
 }
+
+const onUpdateIsInvited = (id: string | undefined, isInvited: boolean) => {
+  if (!id) return;
+  emit('updateIsInvited', id, isInvited);
+};
 
 const onClickPreviewSend = async (invite: IInviteMember) => {
   const inviteBgColor = localStorage.getItem('inviteBgColor');

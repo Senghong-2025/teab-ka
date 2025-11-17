@@ -13,8 +13,8 @@
         </div>
         <button
           class="bg-gray-200 rounded-md p-2"
-          :class="$route.path === '/wedding/details/invite-card' ? 'bg-indigo-600 text-gray-50' : 'bg-gray-200'"
-          @click="navigateTo({path: '/wedding/details/invite-card', query: route.query  })">
+          :class="$route.path === '/wedding/details/sample-card' ? 'bg-indigo-600 text-gray-50' : 'bg-gray-200'"
+          @click="navigateTo({path: '/wedding/details/sample-card', query: route.query  })">
           <span> Invite Card </span>
         </button>
       </div>
