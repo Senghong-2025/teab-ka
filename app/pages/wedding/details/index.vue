@@ -1,5 +1,10 @@
 <template>
-  <InviteList :invite-list="inviteList" :is-loading="isLoading" @delete="deleteInviteMember" />
+  <InviteList
+    v-model:dialog-model="confirmDeleteVisible"
+    :invite-list="inviteList"
+    :is-loading="isLoading"
+    @delete="deleteInviteMember"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -10,6 +15,7 @@ const {
   inviteList,
   isLoading,
   deleteInviteMember,
+  confirmDeleteVisible,
 } = useInviteMember();
 
 onMounted(() => {

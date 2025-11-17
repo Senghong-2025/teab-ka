@@ -9,20 +9,27 @@
                 <RefreshCcw :size="20" class="text-red-400" />
             </button>
         </div>
-        <Two :data="sampleData" :invite="store.user.username ?? 'Root'" />
+        <Two :data="sampleData" invite="Mrr. Senghong" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import Two from '~/components/wedding/card/Two.vue';
 import type { WeddingFormData } from '~/models/wedding';
-import { useStore } from '~~/stores';
 import { RefreshCcw } from 'lucide-vue-next';
 
-const store = useStore();
 const router = useRouter();
 const route = useRoute();
 const selectedColor = ref(localStorage.getItem('inviteBgColor') || '#ffc310eb');
+
+onMounted(() => {
+    router.replace({
+        query: {
+            ...route.query,
+            bc: selectedColor.value,
+        }
+    });
+})
 
 const onColorChange = () => {
     router.replace({

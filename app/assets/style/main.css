@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Khmer:wght@400;700&family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Moul&family=Pacifico&display=swap');
 
 html, body, #__nuxt, #__layout {
   height: 100%;
@@ -24,8 +21,6 @@ html, body, #__nuxt, #__layout {
 .font-sans {
   font-family: 'Inter', 'Noto Serif Khmer', system-ui, sans-serif;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap');
 
 .font-imperial {
   font-family: "Imperial Script", cursive;
