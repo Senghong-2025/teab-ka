@@ -85,12 +85,12 @@ const onUpdateIsInvited = (id: string | undefined, isInvited: boolean) => {
 };
 
 const onClickPreviewSend = async (invite: IInviteMember) => {
-  const inviteBgColor = localStorage.getItem('inviteBgColor');
+  const inviteCardColor = localStorage.getItem('inviteCardColor');
   const params = new URLSearchParams({
     event_id: String(invite.eventId),
     type: "2",
     to: invite.title,
-    bc: String(inviteBgColor)
+    bc: String(inviteCardColor)
   });
 
   const url = `/wedding/share?${params.toString()}`;

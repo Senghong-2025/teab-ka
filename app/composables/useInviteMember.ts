@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, query, where, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where, updateDoc, orderBy } from "firebase/firestore";
 import type { IInviteMember } from "~/models/invite";
 
 const inviteList = ref<IInviteMember[]>([]);
@@ -19,15 +19,32 @@ export default function useInviteMember() {
 
     const createInviteMember = async () => {
         setLoading('create', true);
+        let hasError = false;
         try {
+            // Check for duplicate title
+            const isDuplicate = inviteList.value.some(
+                invite => invite.title.toLowerCase().trim() === inviteModel.title.toLowerCase().trim()
+            );
+
+            if (isDuplicate) {
+                throw new Error('A member with this title already exists');
+            }
+
             const weddingInviteCollection = collection($db, 'weddingInvite');
-            await addDoc(weddingInviteCollection, inviteModel);
+            await addDoc(weddingInviteCollection, {
+                ...inviteModel,
+                createdOn: new Date()
+            });
             await getInviteByEventId();
         } catch (error) {
+            hasError = true;
             console.error('Create invite error', error);
+            throw error;
         } finally {
             setLoading("create", false);
-            isDialogVisible.value = false;
+            if (!hasError) {
+                isDialogVisible.value = false;
+            }
         }
     };
 
@@ -49,7 +66,7 @@ export default function useInviteMember() {
         setLoading("get", true);
         try {
             const inviteCollection = collection($db, 'weddingInvite');
-            const q = query(inviteCollection, where('eventId', '==', String(getQuery.value.event_id)));
+            const q = query(inviteCollection, where('eventId', '==', String(getQuery.value.event_id)), orderBy('createdOn', 'asc'));
             const querySnapshot = await getDocs(q);
             const data = querySnapshot.docs.map(item => ({
             id: item.id,

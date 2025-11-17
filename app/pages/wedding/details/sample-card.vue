@@ -1,11 +1,17 @@
 <template>
     <div>
         <div class="text-gray-800 text-[20px] p-4 bg-gray-100 rounded-md my-2 items-center gap-2 flex justify-between">
-            <div class="flex gap-2 items-center">
-                <p class="w-full">Sample Invite card</p>
-                <input v-model="selectedColor" type="color" style="height: 40px; width: 40px; border-radius: 8px" @input="onColorChange">
+            <div>
+                <div class="flex gap-1 items-center">
+                    <p class="w-full">Card Color:</p>
+                    <input v-model="cardColor" type="color" @input="onCardColorChange">
+                </div>
+                <div class="flex gap-1 items-center">
+                    <p class="w-full">Text Color:</p>
+                    <input v-model="textColor" type="color" @input="onTextColorChange">
+                </div>
             </div>
-            <button class="text-red-500 p-2 rounded-md bg-gray-200" @click="resetBgColor">
+            <button class="text-red-500 p-2 rounded-md bg-gray-200" @click="resetColors">
                 <RefreshCcw :size="20" class="text-red-400" />
             </button>
         </div>
@@ -20,34 +26,49 @@ import { RefreshCcw } from 'lucide-vue-next';
 
 const router = useRouter();
 const route = useRoute();
-const selectedColor = ref(localStorage.getItem('inviteBgColor') || '#ffc310eb');
+const cardColor = ref(localStorage.getItem('inviteCardColor') || '#ffc310eb');
+const textColor = ref(localStorage.getItem('inviteTextColor') || '#000000');
 
 onMounted(() => {
     router.replace({
         query: {
             ...route.query,
-            bc: selectedColor.value,
+            bc: cardColor.value,
+            tc: textColor.value,
         }
     });
 })
 
-const onColorChange = () => {
+const onCardColorChange = () => {
     router.replace({
         query: {
             ...route.query,
-            bc: selectedColor.value,
+            bc: cardColor.value,
         }
     });
-    localStorage.setItem('inviteBgColor', selectedColor.value);
+    localStorage.setItem('inviteCardColor', cardColor.value);
 };
 
-const resetBgColor = () => {
-    selectedColor.value = "#ffc310eb";
-    localStorage.removeItem("inviteBgColor");
-     router.replace({
+const onTextColorChange = () => {
+    router.replace({
         query: {
             ...route.query,
-            bc: selectedColor.value,
+            tc: textColor.value,
+        }
+    });
+    localStorage.setItem('inviteTextColor', textColor.value);
+};
+
+const resetColors = () => {
+    cardColor.value = "#ffc310eb";
+    textColor.value = "#000000";
+    localStorage.setItem("inviteCardColor", cardColor.value);
+    localStorage.setItem("inviteTextColor", textColor.value);
+    router.replace({
+        query: {
+            ...route.query,
+            bc: cardColor.value,
+            tc: textColor.value,
         }
     });
 }

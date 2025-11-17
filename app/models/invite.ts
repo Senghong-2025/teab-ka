@@ -3,4 +3,5 @@ export interface IInviteMember {
     eventId: string
     title: string
     isInvited: boolean
+    createdOn?: Date
 }
