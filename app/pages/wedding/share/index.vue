@@ -8,62 +8,53 @@
 </template>
 
 <script lang="ts" setup>
-import CardTwo from '~/components/wedding/card/Two.vue';
 import { doc, getDoc } from 'firebase/firestore';
 import { WeddingFormData, type IWeddingFormData } from '~/models/wedding';
+import CardTwo from '~/components/wedding/card/Two.vue';
 
 const route = useRoute();
+const { $db } = useNuxtApp();
 const siteUrl = 'https://havmk.pages.dev';
 
-// Use route.query for SSR compatibility
-const weddingId = computed(() => route.query.event_id as string);
-const formType = computed(() => route.query.type as string);
-const invite = computed(() => route.query.to as string);
+const weddingId = route.query.event_id as string;
+const formType = route.query.type as string;
+const invite = route.query.to as string;
 
-const { $db } = useNuxtApp();
-
-// Fetch wedding details with useAsyncData for proper SSR
-const { data: weddingDetails } = await useAsyncData(
-  `wedding-${weddingId.value}`,
+// Fetch wedding details **before SSR**
+const { data: weddingDetails } = await useAsyncData<IWeddingFormData | null>(
+  `wedding-${weddingId}`,
   async () => {
-    if (!weddingId.value) return null;
+    if (!weddingId) return null;
 
-    try {
-      const weddingDocRef = doc($db, 'wedding', weddingId.value);
-      const weddingDocSnap = await getDoc(weddingDocRef);
+    const docRef = doc($db, 'wedding', weddingId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) return null;
 
-      if (!weddingDocSnap.exists()) return null;
-
-      const result = {
-        id: weddingDocSnap.id,
-        ...weddingDocSnap.data()
-      } as IWeddingFormData;
-
-      return new WeddingFormData(result);
-    } catch (error) {
-      console.error('Error fetching wedding details:', error);
-      return null;
-    }
+    const result = { id: docSnap.id, ...docSnap.data() } as IWeddingFormData;
+    return new WeddingFormData(result);
   },
-  {
-    server: true,
-    lazy: false,
-  }
+  { server: true, lazy: false }
 );
 
-// Hardcoded SEO for testing
-const pageTitle = 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
-const pageDescription = 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' + invite.value;
-const pageImage = 'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg';
+// Build SEO using fetched data directly (SSR-ready)
+const pageTitle = weddingDetails.value
+  ? `អាពាហ៍ពិពាហ៍របស់ ${weddingDetails.value.bride.fullNameKh} & ${weddingDetails.value.groom.fullNameKh}`
+  : 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
+
+const pageDescription = weddingDetails.value
+  ? `អញ្ជើញចូលរួមពិធីអាពាហ៍ពិពាហ៍របស់ ${weddingDetails.value.bride.fullNameKh} និង ${weddingDetails.value.groom.fullNameKh} ${invite ?? ''}`
+  : `អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។ ${invite ?? ''}`;
+
+const pageImage =
+  weddingDetails.value?.photoPreview?.at(0)  ||
+  'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg';
 
 useHead({
-  htmlAttrs: {
-    lang: 'en',
-  },
+  htmlAttrs: { lang: 'en' },
   title: pageTitle,
   meta: [
     { name: 'description', content: pageDescription },
-    { name: 'keywords', content: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation, ការអញ្ជើញ, សិរីសួស្ដី, havmk' },
+    { name: 'keywords', content: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation' },
 
     // Open Graph
     { property: 'og:title', content: pageTitle },
@@ -71,25 +62,18 @@ useHead({
     { property: 'og:image', content: pageImage },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
-    { property: 'og:image:type', content: 'image/jpeg' },
-    { property: 'og:image:secure_url', content: pageImage },
-    { property: 'og:image:alt', content: pageTitle },
-    { property: 'og:url', content: `${siteUrl}${route.fullPath}` },
     { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'HAVMK ហៅមក' },
-    { property: 'og:locale', content: 'km_KH' },
+    { property: 'og:url', content: `${siteUrl}${route.fullPath}` },
 
     // Twitter Card
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: pageTitle },
     { name: 'twitter:description', content: pageDescription },
     { name: 'twitter:image', content: pageImage },
-    { name: 'twitter:image:alt', content: pageTitle },
   ],
-  link: [
-    { rel: 'canonical', href: `${siteUrl}${route.path}` },
-  ],
+  link: [{ rel: 'canonical', href: `${siteUrl}${route.path}` }],
 });
 </script>
+
 
 <style></style>
