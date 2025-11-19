@@ -3,14 +3,14 @@
     <div class="flex gap-2 mb-2 justify-between text-[12px]">
       <div class="flex w-full justify-between text-gray-400">
         <div @click="navigateTo('/wedding')">
-          <div class="bg-gray-200 p-2 rounded-md">
+          <div class="bg-gray-200 p-2 rounded-md sm:hidden">
             <ArrowLeft class="sm:hidden text-gray-500"/>
           </div>
           <BaseButton class="hidden sm:block" type="btn-primary" :name="$t('Back')" />
         </div>
        <div class="flex justify-end w-full gap-2">
           <div
-            class="rounded-md p-2 flex gap-2 cursor-pointer"
+            class="rounded-md p-2 flex gap-2 cursor-pointer items-center"
             :class="$route.path === '/wedding/details' ? 'bg-indigo-600 text-gray-50' : 'bg-gray-200'"
             @click="navigateTo({path: '/wedding/details', query: route.query  })">
             <span>{{ $t('Invited Member') }}</span>

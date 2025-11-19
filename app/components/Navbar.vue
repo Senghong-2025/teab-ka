@@ -20,7 +20,7 @@
         {{ loc.name }}
       </button>
       <button class="px-3 py-1.5 rounded-md font-medium text-sm transition-all duration-200 bg-indigo-600 text-white" @click="navigateTo('/setting')">
-        <Settings />
+        <Settings :size="18" />
       </button>
     </div>
   </div>

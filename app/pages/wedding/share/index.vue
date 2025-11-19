@@ -12,44 +12,64 @@ import CardTwo from '~/components/wedding/card/Two.vue';
 // import CardOne from '~/components/wedding/card/One.vue';
 
 const route = useRoute();
-const siteUrl = 'https://havmk.pages.dev'; // Replace with your actual domain
+const siteUrl = 'https://havmk.pages.dev';
+
+// Use route.query for SSR compatibility
+const weddingId = computed(() => route.query.event_id as string);
+const formType = computed(() => route.query.type as string);
+const invite = computed(() => route.query.to as string);
+
+const { getWeddingDetails, weddingDetails } = useWedding();
+
+// Fetch wedding details for SEO
+if (weddingId.value) {
+  await getWeddingDetails(String(weddingId.value));
+}
+
+const pageTitle = computed(() => {
+  if (weddingDetails.value?.bride?.fullNameKh && weddingDetails.value?.groom?.fullNameKh) {
+    return `សិរីសួស្ដីអាពាហ៍ពិពាហ៍ ${weddingDetails.value.groom.fullNameKh} & ${weddingDetails.value.bride.fullNameKh}`;
+  }
+  return 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
+});
+
+const pageDescription = computed(() => {
+  if (weddingDetails.value?.weddingDateForDisplay) {
+    return `អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង នៅថ្ងៃទី ${weddingDetails.value.weddingDateForDisplay}`;
+  }
+  return 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។';
+});
+
+const pageImage = computed(() =>
+  weddingDetails.value?.coverPhoto || 'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg'
+);
 
 useHead({
-  // title: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍',
+  title: pageTitle,
   meta: [
-    { name: 'description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
-
+    { name: 'description', content: pageDescription },
     { name: 'keywords', content: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation, ការអញ្ជើញ, សិរីសួស្ដី, havmk' },
+
     // Open Graph
-    { property: 'og:title', content: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍' },
-    { property: 'og:description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
-    { property: 'og:image', content: 'https://res.cloudinary.com/deevrlkam/image/upload/v1763022991/default/kzltymhlfd6sgargtmhv.png' },
+    { property: 'og:title', content: pageTitle },
+    { property: 'og:description', content: pageDescription },
+    { property: 'og:image', content: pageImage },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
     { property: 'og:url', content: `${siteUrl}${route.fullPath}` },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'HAVMK ហៅមក' },
 
-    // Twitter
-    // { name: 'twitter:card', content: 'summary_large_image' },
-    // { name: 'twitter:title', content: 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍' },
-    // { name: 'twitter:description', content: 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' },
-    // { name: 'twitter:image', content: 'https://i.pinimg.com/736x/d5/16/bc/d516bc8ce09abb8e3455d62c4324a66a.jpg' },
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: pageTitle },
+    { name: 'twitter:description', content: pageDescription },
+    { name: 'twitter:image', content: pageImage },
+  ],
+  link: [
+    { rel: 'canonical', href: `${siteUrl}${route.path}` },
   ],
 })
-
-
-const { getWeddingDetails, weddingDetails } = useWedding();
-
-const urlParams = new URLSearchParams(window.location.search);
-
-const weddingId = urlParams.get('event_id');
-const formType = urlParams.get('type');
-const invite = urlParams.get('to')?.toString();
-
-onMounted(() => {
-  getWeddingDetails(String(weddingId));
-});
 </script>
 
 <style></style>

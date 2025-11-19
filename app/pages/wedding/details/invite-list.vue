@@ -73,7 +73,7 @@ const model = computed({
 });
 
 const { t } = useI18n();
-const { inviteCardColor } = useColors();
+const { inviteCardColor, inviteTextColor } = useColors();
 
 const onClickDelete = (id?: string) => {
   model.value = true;
@@ -90,7 +90,8 @@ const onClickPreviewSend = async (invite: IInviteMember) => {
     event_id: String(invite.eventId),
     type: "2",
     to: invite.title,
-    bc: inviteCardColor.value
+    bc: inviteCardColor.value,
+    tc: inviteTextColor.value,
   });
 
   const url = `/wedding/share?${params.toString()}`;
