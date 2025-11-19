@@ -34,7 +34,7 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', file: 'en.json' },
       { code: 'kh', language: 'km-KH', file: 'kh.json' }
     ],
-    defaultLocale: 'kh',
+    defaultLocale: 'en',
     langDir: 'locales',
     strategy: 'no_prefix',
   },

@@ -33,15 +33,45 @@ onMounted(async () => {
   // setTimeout(() => {
   // }, 500);
 })
+// Hardcoded SEO for testing
+const siteUrl = 'https://havmk.pages.dev';
+const pageTitle = 'HAVMK - សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
+const pageDescription = 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។ Wedding invitation platform.';
+const pageImage = 'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg';
+
 useHead({
   htmlAttrs: {
-    lang: 'km'
+    lang: 'en'
   },
+  title: pageTitle,
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { name: 'format-detection', content: 'telephone=no' }
-  ]
+    { name: 'format-detection', content: 'telephone=no' },
+    { name: 'description', content: pageDescription },
+    { name: 'keywords', content: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation, ការអញ្ជើញ, សិរីសួស្ដី, havmk' },
+
+    // Open Graph
+    { property: 'og:title', content: pageTitle },
+    { property: 'og:description', content: pageDescription },
+    { property: 'og:image', content: pageImage },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:type', content: 'image/jpeg' },
+    { property: 'og:url', content: siteUrl },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'HAVMK ហៅមក' },
+    { property: 'og:locale', content: 'km_KH' },
+
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: pageTitle },
+    { name: 'twitter:description', content: pageDescription },
+    { name: 'twitter:image', content: pageImage },
+  ],
+  link: [
+    { rel: 'canonical', href: siteUrl },
+  ],
 })
 </script>
 <style scoped>
