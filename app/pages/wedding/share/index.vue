@@ -53,7 +53,7 @@ const { data: weddingDetails } = await useAsyncData(
 
 // Hardcoded SEO for testing
 const pageTitle = 'សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
-const pageDescription = 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។';
+const pageDescription = 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។' + invite.value;
 const pageImage = 'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg';
 
 useHead({
