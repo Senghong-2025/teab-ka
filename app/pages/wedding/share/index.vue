@@ -66,24 +66,35 @@ useSeoMeta({
   description: pageDescription,
   keywords: 'អាពាហ៍ពិពាហ៍, ការរៀបការ, wedding, invitation, ការអញ្ជើញ, សិរីសួស្ដី, havmk',
 
-  // Open Graph
+  // Open Graph (Facebook, LinkedIn, Discord, WhatsApp, Telegram, iMessage)
   ogTitle: pageTitle,
   ogDescription: pageDescription,
   ogImage: pageImage,
   ogImageWidth: 1200,
   ogImageHeight: 630,
+  ogImageAlt: pageTitle,
   ogUrl: `${siteUrl}${route.fullPath}`,
   ogType: 'website',
   ogSiteName: 'HAVMK ហៅមក',
+  ogLocale: 'km_KH',
 
   // Twitter Card
   twitterCard: 'summary_large_image',
   twitterTitle: pageTitle,
   twitterDescription: pageDescription,
   twitterImage: pageImage,
+  twitterImageAlt: pageTitle,
 });
 
 useHead({
+  htmlAttrs: {
+    lang: 'km',
+  },
+  meta: [
+    // Additional OG tags for better compatibility
+    { property: 'og:image:type', content: 'image/jpeg' },
+    { property: 'og:image:secure_url', content: pageImage },
+  ],
   link: [
     { rel: 'canonical', href: `${siteUrl}${route.path}` },
   ],
