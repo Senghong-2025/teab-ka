@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type IWeddingFormData, WeddingFormData } from './../models/wedding';
 import { collection, addDoc, query, where, getDocs, doc, getDoc, updateDoc } from 'firebase/firestore';
-import type { ICloudinaryUploadResponse } from '~/models/upload';
+// import type { ICloudinaryUploadResponse } from '~/models/upload';
 import { useStore } from '~~/stores';
 
 export default function useWedding() {
@@ -84,10 +85,10 @@ export default function useWedding() {
         }
     };
 
-    const handleUpdateImages = async (): Promise<ICloudinaryUploadResponse[]> => {
+    const handleUpdateImages = async (): Promise<any> => {
         if (!preveiwImageFiles.value.length) return [];
         try {
-            const response = await uploadMulitpleImages(preveiwImageFiles.value);
+            const response = await uploadMulitpleImages(preveiwImageFiles.value, 'images/wedding/');
             return response.data;
         } catch (error) {
             console.error("Upload Error:", error);
@@ -106,7 +107,7 @@ export default function useWedding() {
                 formData.value.photoPreview = [];
             }
             formData.value.photoPreview.push(
-                ...uploads.map(item => item.url)
+                ...uploads.map((item: { download_url: any; }) => item.download_url)
             );
 
             // Update wedding event

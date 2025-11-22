@@ -15,9 +15,10 @@ export default function useApi() {
         files.forEach((file) => {
             formData.append('files', file);
         });
-        formData.append('folder', folder);
+        // formData.append('folder', folder);
+        formData.append('path', folder);
 
-        return $api.post('/common/upload-multiple', formData, {
+        return $api.post('/github/upload-multiple', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
     };

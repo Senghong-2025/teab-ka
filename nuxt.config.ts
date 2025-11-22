@@ -11,10 +11,10 @@ export default defineNuxtConfig({
     './app/assets/style/main.css',
     './app/assets/style/base.css'
   ],
-  devServer: {
-    host: '0.0.0.0',
-    port: 3000
-  },
+  // devServer: {
+  //   host: '0.0.0.0',
+  //   port: 3000
+  // },
   runtimeConfig: {
     public: {
       NODE_ENV: import.meta.env.NODE_ENV,
