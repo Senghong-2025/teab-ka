@@ -21,6 +21,7 @@ export default defineNuxtConfig({
       API_KEY: import.meta.env.API_KEY,
       API_URL: import.meta.env.API_URL,
       SECRET_KEY: import.meta.env.SECRET_KEY,
+      UPLOAD_API_KEY: import.meta.env.UPLOAD_API_KEY,
       cloudinaryCloudName: '',
       cloudinaryUploadPreset: ''
     }

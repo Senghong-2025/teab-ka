@@ -1,5 +1,6 @@
 export default function useApi() {
     const { $api } = useNuxtApp();
+    const config = useRuntimeConfig();
     const uploadImage = (file: File, folder = 'default') => {
         const formData = new FormData();
         formData.append('file', file);
@@ -19,7 +20,7 @@ export default function useApi() {
         formData.append('path', folder);
 
         return $api.post('/github/upload-multiple', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
+            headers: { 'Content-Type': 'multipart/form-data', 'x-api-key': String(config.public.UPLOAD_API_KEY) || '' },
         });
     };
 
