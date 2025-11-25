@@ -209,5 +209,14 @@
       "reset": "កំណត់ឡើងវិញ"
     }
   },
-  "Wedding Invitation": "ការអញ្ជើញ អាពាហ៍ពិពាហ៍"
+  "Wedding Invitation": "ការអញ្ជើញ អាពាហ៍ពិពាហ៍",
+  "Copied link for": "បានចម្លងតំណសម្រាប់",
+  "Success": "ជោគជ័យ",
+  "Error": "កំហុស",
+  "Warning": "ការព្រមាន",
+  "Info": "ព័ត៌មាន",
+  "Copied!": "បានចម្លង!",
+  "Link copied to clipboard": "បានចម្លងតំណទៅក្ដារតម្បៀតខ្ទាស់",
+  "Copy Failed": "ការចម្លងបរាជ័យ",
+  "Failed to copy link. Please try again.": "មិនអាចចម្លងតំណបានទេ។ សូមព្យាយាមម្តងទៀត។"
 }

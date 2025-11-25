@@ -15,6 +15,9 @@
             <td class="border border-gray-300 px-4 py-2">{{ invite.title }}</td>
             <td class="border border-gray-300 px-4 py-2">
               <div class="flex gap-3 justify-center items-center">
+                <button class="px-2" @click="copyLink(invite)">
+                  <Copy :size="20" class="text-indigo-500" />
+                </button>
                 <button @click="onClickPreviewSend(invite)">
                   <Send :size="20" class="text-indigo-500" />
                 </button>
@@ -52,7 +55,8 @@
 import type { IInviteMember } from '~/models/invite';
 import BaseButton from '~/components/common/BaseButton.vue';
 import BaseDialog from '~/components/common/BaseDialog.vue';
-import { TriangleAlert,Trash, Send } from 'lucide-vue-next';
+import { TriangleAlert,Trash, Send, Copy } from 'lucide-vue-next';
+import { notifySuccess, notifyError } from '~/utils/notificationHelper';
 
 const props = defineProps<{
   inviteList: IInviteMember[]
@@ -83,6 +87,25 @@ const onClickDelete = (id?: string) => {
 const onUpdateIsInvited = (id: string | undefined, isInvited: boolean) => {
   if (!id) return;
   emit('updateIsInvited', id, isInvited);
+};
+
+const copyLink = async (invite: IInviteMember) => {
+  const params = new URLSearchParams({
+    event_id: String(invite.eventId),
+    type: "2",
+    to: invite.title,
+    bc: inviteCardColor.value,
+    tc: inviteTextColor.value,
+  });
+
+  const fullUrl = `${window.location.origin}/wedding/share?${params.toString()}`;
+
+  try {
+    await navigator.clipboard.writeText(fullUrl);
+    notifySuccess(`${t('Copied link for')}: ${invite.title}`, t('Success'))
+  } catch {
+    notifyError(t('Error'));
+  }
 };
 
 const onClickPreviewSend = async (invite: IInviteMember) => {

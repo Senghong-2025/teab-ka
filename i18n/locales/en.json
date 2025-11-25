@@ -209,5 +209,14 @@
       "save": "Save Changes",
       "reset": "Reset"
     }
-  }
+  },
+  "Copied link for": "Copied link for",
+  "Success": "Success",
+  "Error": "Error",
+  "Warning": "Warning",
+  "Info": "Info",
+  "Copied!": "Copied!",
+  "Link copied to clipboard": "Link copied to clipboard",
+  "Copy Failed": "Copy Failed",
+  "Failed to copy link. Please try again.": "Failed to copy link. Please try again."
 }
