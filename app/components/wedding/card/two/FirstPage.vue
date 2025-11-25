@@ -4,14 +4,22 @@
         :style="{ backgroundColor: bg }"
         >
         <div class="text-center">
-            <span class="text-[30px] font-moul" :style="{ color: textColor }">សិរីសួស្ដីអាពាហ៍ពិពាហ៍</span>
-            <div class="flex justify-center items-center">
-              <span class="text-[30px] font-moul" :style="{ color: textColor }">{{event?.bride?.fullNameKh.at(0)}}</span>
-              <div class="w-20 h-auto">
-                <img src="../../../../assets/images/heart.png" class="w-full h-full object-center" alt="">
-              </div>
-              <span class="text-[30px] font-moul" :style="{ color: textColor }">{{event?.groom?.fullNameKh.at(0)}}</span>
+          <span class="text-[30px] font-moul" :style="{ color: textColor }">សិរីសួស្ដីអាពាហ៍ពិពាហ៍</span>
+          <div class="grid grid-cols-3 place-items-center">
+            <span class="text-[20px] font-moul" :style="{ color: textColor }">
+              {{ event?.groom?.fullNameKh.split(' ').pop() }}
+            </span>
+
+            <div class="w-20 h-auto flex justify-center items-center">
+              <img src="../../../../assets/images/heart.png"
+                  class="w-full h-full object-contain"
+                  alt="">
             </div>
+
+            <span class="text-[20px] font-moul" :style="{ color: textColor }">
+              {{ event?.bride?.fullNameKh.split(' ').pop() }}
+            </span>
+          </div>
             <h3
                 class="font-khmer text-2xl font-bold mb-1 animate-fade-in"
                 :style="{ color: textColor, animationDelay: '0.25s' }">

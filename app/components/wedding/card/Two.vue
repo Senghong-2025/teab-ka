@@ -13,18 +13,16 @@
       </header>
 
       <section class="text-center mt-4">
-        <div class="mb-4 animate-slide-in-left" style="animation-delay: 0.8s">
-          <h2 class="font-khmer text-3xl font-bold my-1" :style="{ color: textColor }">{{ data.bride?.fullNameKh }}</h2>
-          <h2 class="font-serif text-2xl font-bold my-1 font-imperial" :style="{ color: textColor }">{{ data.bride?.fullName }}</h2>
-        </div>
-
-        <div class="animate-fade-in my-3" style="animation-delay: 1s">
-          <span class="text-[1.75rem] mx-2" :style="{ color: textColor }">&amp;</span>
-        </div>
-
         <div class="mt-4 animate-slide-in-right" style="animation-delay: 1.1s">
           <h2 class="font-khmer text-3xl font-bold my-1" :style="{ color: textColor }">{{ data.groom?.fullNameKh }}</h2>
           <h2 class="font-serif text-2xl font-bold my-1 font-imperial" :style="{ color: textColor }">{{ data.groom?.fullName }}</h2>
+        </div>
+        <div class="animate-fade-in my-3" style="animation-delay: 1s">
+          <span class="text-[1.75rem] mx-2" :style="{ color: textColor }">&amp;</span>
+        </div>
+        <div class="mb-4 animate-slide-in-left" style="animation-delay: 0.8s">
+          <h2 class="font-khmer text-3xl font-bold my-1" :style="{ color: textColor }">{{ data.bride?.fullNameKh }}</h2>
+          <h2 class="font-serif text-2xl font-bold my-1 font-imperial" :style="{ color: textColor }">{{ data.bride?.fullName }}</h2>
         </div>
       </section>
     
