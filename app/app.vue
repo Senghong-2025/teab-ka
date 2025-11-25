@@ -37,7 +37,7 @@ onMounted(async () => {
 const siteUrl = 'https://havmk.pages.dev';
 const pageTitle = 'HAVMK - សិរីសួស្ដីអាពាហ៍ពិពាហ៍';
 const pageDescription = 'អញ្ជើញចូលរួមជាមួយពិធីអាពាហ៍ពិពាហ៍ដ៏ស្រស់ស្អាតរបស់យើង។ Wedding invitation platform.';
-const pageImage = 'https://res.cloudinary.com/deevrlkam/image/upload/v1763568486/default/xo539jhwon57j6bxgrxn.jpg';
+const pageImage = 'https://raw.githubusercontent.com/hsh-2001/Storage/main/images/wedding/2025-11-25%2019.24.46-1764073511712.jpg';
 
 useHead({
   htmlAttrs: {
