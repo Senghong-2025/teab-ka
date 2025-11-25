@@ -289,15 +289,16 @@
             </div>
           </div>
           <!-- Photo Upload Section -->
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <label class="block text-sm font-medium text-gray-700">
-                {{ $t('Preview Photos') }} <span v-if="!isEdit" class="text-red-500">*</span>
-              </label>
-              <span class="text-xs text-gray-500">
+          <div class="space-y-6">
+            <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {{ $t('Preview Photos') }} <span v-if="!isEdit" class="text-red-500">*</span>
+              <span class="ml-auto text-xs text-gray-500 font-normal">
                 {{ totalImages }} / 5 photos
               </span>
-            </div>
+            </h2>
 
             <!-- Hidden file input -->
             <input
@@ -381,6 +382,116 @@
             </p>
           </div>
 
+          <!-- KH QR Code Section -->
+          <div class="space-y-6">
+            <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+              </svg>
+              KH QR Code (Optional)
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- QR Code 1 -->
+              <div class="space-y-4 p-4 bg-blue-50 rounded-lg">
+                <h3 class="font-semibold text-blue-700 text-center">គណនីទី ១</h3>
+
+                <!-- Hidden file input for QR1 -->
+                <input
+                  ref="qrCode1Input"
+                  type="file"
+                  accept="image/jpeg, image/png, image/webp"
+                  class="hidden"
+                  @change="handleQrCode1Change"
+                >
+
+                <!-- QR Code 1 Preview/Upload -->
+                <div class="space-y-2">
+                  <div
+                    v-if="qrCode1Preview || formData.khQrCode1"
+                    class="relative aspect-square w-full max-w-[200px] mx-auto rounded-lg overflow-hidden bg-white shadow-md"
+                  >
+                    <img
+                      :src="qrCode1Preview || formData.khQrCode1"
+                      alt="QR Code 1"
+                      class="w-full h-full object-contain"
+                    >
+                    <button
+                      type="button"
+                      class="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-lg"
+                      @click="removeQrCode1"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <button
+                    v-if="!qrCode1Preview && !formData.khQrCode1"
+                    type="button"
+                    class="w-full aspect-square max-w-[200px] mx-auto rounded-lg border-2 border-dashed border-blue-300 hover:border-blue-500 bg-white hover:bg-blue-50 transition-all duration-200 flex flex-col items-center justify-center gap-2"
+                    @click="triggerQrCode1Input"
+                  >
+                    <svg class="w-12 h-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="text-sm text-blue-600 font-medium">Upload QR Code</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- QR Code 2 -->
+              <div class="space-y-4 p-4 bg-purple-50 rounded-lg">
+                <h3 class="font-semibold text-purple-700 text-center">គណនីទី ២</h3>
+
+                <!-- Hidden file input for QR2 -->
+                <input
+                  ref="qrCode2Input"
+                  type="file"
+                  accept="image/jpeg, image/png, image/webp"
+                  class="hidden"
+                  @change="handleQrCode2Change"
+                >
+
+                <!-- QR Code 2 Preview/Upload -->
+                <div class="space-y-2">
+                  <div
+                    v-if="qrCode2Preview || formData.khQrCode2"
+                    class="relative aspect-square w-full max-w-[200px] mx-auto rounded-lg overflow-hidden bg-white shadow-md"
+                  >
+                    <img
+                      :src="qrCode2Preview || formData.khQrCode2"
+                      alt="QR Code 2"
+                      class="w-full h-full object-contain"
+                    >
+                    <button
+                      type="button"
+                      class="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-lg"
+                      @click="removeQrCode2"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <button
+                    v-if="!qrCode2Preview && !formData.khQrCode2"
+                    type="button"
+                    class="w-full aspect-square max-w-[200px] mx-auto rounded-lg border-2 border-dashed border-purple-300 hover:border-purple-500 bg-white hover:bg-purple-50 transition-all duration-200 flex flex-col items-center justify-center gap-2"
+                    @click="triggerQrCode2Input"
+                  >
+                    <svg class="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="text-sm text-purple-600 font-medium">Upload QR Code</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Submit Buttons -->
           <div class="flex gap-4 pt-6">
             <BaseButton :name="isEdit ? 'Update' : 'Save'" class="w-full" type="btn-primary" :is-loading="isLoading('update')"/>
@@ -398,7 +509,7 @@ import { Heart, Users, Calendar, MapPin, Church, PartyPopper, Phone } from 'luci
 import type { WeddingFormData } from '~/models/wedding';
 import BaseButton from '~/components/common/BaseButton.vue';
 
-const { 
+const {
   formData,
   handleSubmit,
   preveiwImageFiles,
@@ -407,10 +518,18 @@ const {
   $db,
   setLoading,
   isLoading,
+  qrCode1File,
+  qrCode2File,
 } = useWedding();
 
 const previewFiles = ref<string[]>([]);
 const fileInput = ref<HTMLInputElement | null>(null);
+
+// QR Code refs and state
+const qrCode1Input = ref<HTMLInputElement | null>(null);
+const qrCode2Input = ref<HTMLInputElement | null>(null);
+const qrCode1Preview = ref<string>('');
+const qrCode2Preview = ref<string>('');
 
 // Calculate total images
 const totalImages = computed(() => {
@@ -489,6 +608,83 @@ const removeExistingPhoto = (index: number) => {
   }
 };
 
+// QR Code handlers
+const triggerQrCode1Input = () => {
+  qrCode1Input.value?.click();
+};
+
+const triggerQrCode2Input = () => {
+  qrCode2Input.value?.click();
+};
+
+const handleQrCode1Change = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.files && target.files[0]) {
+    const file = target.files[0];
+
+    // Validate file type
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      alert('Please upload a valid image file (JPEG, PNG, or WebP)');
+      return;
+    }
+
+    // Validate file size (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB');
+      return;
+    }
+
+    qrCode1File.value = file;
+    qrCode1Preview.value = URL.createObjectURL(file);
+
+    // Reset input
+    target.value = '';
+  }
+};
+
+const handleQrCode2Change = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.files && target.files[0]) {
+    const file = target.files[0];
+
+    // Validate file type
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      alert('Please upload a valid image file (JPEG, PNG, or WebP)');
+      return;
+    }
+
+    // Validate file size (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB');
+      return;
+    }
+
+    qrCode2File.value = file;
+    qrCode2Preview.value = URL.createObjectURL(file);
+
+    // Reset input
+    target.value = '';
+  }
+};
+
+const removeQrCode1 = () => {
+  if (qrCode1Preview.value) {
+    URL.revokeObjectURL(qrCode1Preview.value);
+    qrCode1Preview.value = '';
+  }
+  qrCode1File.value = null;
+  formData.value.khQrCode1 = undefined;
+};
+
+const removeQrCode2 = () => {
+  if (qrCode2Preview.value) {
+    URL.revokeObjectURL(qrCode2Preview.value);
+    qrCode2Preview.value = '';
+  }
+  qrCode2File.value = null;
+  formData.value.khQrCode2 = undefined;
+};
+
 onMounted(async () => {
   setLoading('getEdit', true);
   if (isEdit.value && weddingId.value) {
@@ -500,6 +696,18 @@ onMounted(async () => {
     }
   }
   setLoading("getEdit", false);
+});
+
+onUnmounted(() => {
+  // Clean up QR code preview URLs
+  if (qrCode1Preview.value) {
+    URL.revokeObjectURL(qrCode1Preview.value);
+  }
+  if (qrCode2Preview.value) {
+    URL.revokeObjectURL(qrCode2Preview.value);
+  }
+  // Clean up photo preview URLs
+  previewFiles.value.forEach(url => URL.revokeObjectURL(url));
 });
 </script>
 

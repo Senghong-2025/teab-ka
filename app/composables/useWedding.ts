@@ -11,6 +11,8 @@ export default function useWedding() {
     const { setLoading, isLoading } = useLoading();
     const { uploadMulitpleImages } = useApi();
     const preveiwImageFiles = ref<File[]>([]);
+    const qrCode1File = ref<File | null>(null);
+    const qrCode2File = ref<File | null>(null);
     const createDefaultWeddingFormData = (): IWeddingFormData => ({
         hostId: store.user.random_id ?? 1000000,
         bride: { fullName: '', fullNameKh: '', parentsNames: '' },
@@ -96,12 +98,40 @@ export default function useWedding() {
         }
     };
 
+    const handleUploadQrCodes = async (): Promise<{ qr1?: string; qr2?: string }> => {
+        const result: { qr1?: string; qr2?: string } = {};
+
+        try {
+            // Upload QR Code 1
+            if (qrCode1File.value) {
+                const response = await uploadMulitpleImages([qrCode1File.value], 'images/wedding/qr/');
+                if (response.data && response.data.length > 0) {
+                    result.qr1 = response.data[0].download_url;
+                }
+            }
+
+            // Upload QR Code 2
+            if (qrCode2File.value) {
+                const response = await uploadMulitpleImages([qrCode2File.value], 'images/wedding/qr/');
+                if (response.data && response.data.length > 0) {
+                    result.qr2 = response.data[0].download_url;
+                }
+            }
+
+            return result;
+        } catch (error) {
+            console.error("QR Code Upload Error:", error);
+            throw new Error("QR code upload error");
+        }
+    };
+
     const route = useRoute();
     const isEdit = computed(() => route.query.edit === "true");
     const weddingId = computed(() => route.query.i as string);
     const handleSubmit = async () => {
         setLoading("update", true);
         try {
+            // Upload preview photos
             const uploads = await handleUpdateImages();
             if (!Array.isArray(formData.value.photoPreview)) {
                 formData.value.photoPreview = [];
@@ -109,6 +139,15 @@ export default function useWedding() {
             formData.value.photoPreview.push(
                 ...uploads.map((item: { download_url: any; }) => item.download_url)
             );
+
+            // Upload QR codes
+            const qrUploads = await handleUploadQrCodes();
+            if (qrUploads.qr1) {
+                formData.value.khQrCode1 = qrUploads.qr1;
+            }
+            if (qrUploads.qr2) {
+                formData.value.khQrCode2 = qrUploads.qr2;
+            }
 
             // Update wedding event
             if (isEdit.value && weddingId.value) {
@@ -158,5 +197,7 @@ export default function useWedding() {
         weddingId,
         $db,
         setLoading,
+        qrCode1File,
+        qrCode2File,
     }
 };

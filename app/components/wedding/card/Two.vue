@@ -37,11 +37,17 @@
           :wedding-time="data.weddingTime"
         />
       <!-- End Description -->
-
+<!-- 
       <footer class="mt-8 pt-4 border-t border-[#fde8d0] text-center animate-fade-in" style="animation-delay: 2s">
         <p class="text-[0.8125rem] font-medium my-1" :style="{ color: textColor }">{{ data.contact?.email }}</p>
-      </footer>
+      </footer> -->
     </div>
+      <KhQrCode
+        v-if="data.khQrCode1 || data.khQrCode2"
+        :qr-code1="data.khQrCode1"
+        :qr-code2="data.khQrCode2"
+      />
+      <ContactHost :event="data" :invite="invite"/>
   </div>
 </template>
 
@@ -50,6 +56,8 @@ import FirstPage from './two/FirstPage.vue'
 import type { WeddingFormData } from '~/models/wedding'
 import WeddingDescription from '../WeddingDescription.vue';
 import PhotoSlider from '../PhotoSlider.vue';
+import KhQrCode from './two/KhQrCode.vue';
+import ContactHost from './two/ContactHost.vue';
 
 defineProps<{data: WeddingFormData, invite: string}>();
 const bg = useShareBackground();

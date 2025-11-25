@@ -36,6 +36,8 @@ export interface IWeddingFormData {
   mapUrl: string
   coverPhoto: string
   photoPreview?: string[]
+  khQrCode1?: string
+  khQrCode2?: string
 }
 
 export class WeddingFormData implements IWeddingFormData {
@@ -56,6 +58,8 @@ export class WeddingFormData implements IWeddingFormData {
   mapUrl: string;
   coverPhoto: string;
   photoPreview?: string[] | undefined;
+  khQrCode1?: string | undefined;
+  khQrCode2?: string | undefined;
 
   constructor(init: IWeddingFormData) {
     this.id = init.id ?? '';
@@ -78,6 +82,8 @@ export class WeddingFormData implements IWeddingFormData {
     this.coverPhoto = init.coverPhoto;
 
     this.photoPreview = init.photoPreview ?? [];
+    this.khQrCode1 = init.khQrCode1;
+    this.khQrCode2 = init.khQrCode2;
   }
 
   get weddingDateForDisplay(){
