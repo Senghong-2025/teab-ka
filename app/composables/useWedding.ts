@@ -142,18 +142,15 @@ export default function useWedding() {
 
             // Upload QR codes
             const qrUploads = await handleUploadQrCodes();
-            if (qrUploads.qr1) {
-                formData.value.khQrCode1 = qrUploads.qr1;
-            }
-            if (qrUploads.qr2) {
-                formData.value.khQrCode2 = qrUploads.qr2;
-            }
-
-            // Update wedding event
+            formData.value.khQrCode1 = qrUploads.qr1 ?? "";
+            formData.value.khQrCode2 = qrUploads.qr2 ?? "";
             if (isEdit.value && weddingId.value) {
                 const weddingRef = doc($db, "wedding", weddingId.value);
+                const updateData = Object.fromEntries(
+                    Object.entries(formData.value).filter(([_, value]) => value !== undefined)
+                );
                 await updateDoc(weddingRef, {
-                    ...formData.value,
+                    ...updateData,
                     updatedAt: new Date().toISOString()
                 });
                 navigateTo("/wedding");

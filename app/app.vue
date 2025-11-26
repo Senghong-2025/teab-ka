@@ -23,10 +23,11 @@
 <script lang="ts" setup>
 const isReady = ref(false);
 
-const { getUserById } = useAuthentication();
-const isToken = useCookie('token').value;
+const { getUserById, getToken } = useAuthentication();
+
 onMounted(async () => {
-  if (isToken) {
+  const token = getToken();
+  if (token) {
     await getUserById();
   }
   isReady.value = true;

@@ -36,10 +36,15 @@ export default function useAuthentication() {
       }
       await addDoc(colectdoc, saveUser);
       const token = await response.user.getIdToken();
-      useCookie('token').value = token;
-      useCookie('user_id').value = response.user.uid;
+
+      // Store in localStorage (no expiration)
+      if (import.meta.client) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user_id', response.user.uid);
+      }
+
       await getUserById();
-      window.location.href = '/home'; 
+      window.location.href = '/home';
     } catch (error) {
       throw new Error(`Create account error: ${error}`);
     } finally {
@@ -53,10 +58,15 @@ export default function useAuthentication() {
       const response = await signInWithEmailAndPassword($auth, authModel.email, authModel.password);
       const result = response as UserCredential;
       const token = await result.user.getIdToken();
-      useCookie('token').value = token;
-      useCookie('user_id').value = response.user.uid;
+
+      // Store in localStorage (no expiration)
+      if (import.meta.client) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user_id', response.user.uid);
+      }
+
       await getUserById(result.user.uid);
-      window.location.href = '/home'; 
+      window.location.href = '/home';
       return response;
     } catch (error) {
       throw new Error(`Login error: ${error}`);
@@ -75,19 +85,45 @@ export default function useAuthentication() {
   }
 
   const onLogout = () => {
-    useCookie('token').value = null;
+    // Clear localStorage
+    if (import.meta.client) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user_id');
+    }
     store.user = {} as IUserResponse;
     navigateTo('/');
   };
 
   const getUserById = async (id?: string) => {
     const userCollection = collection($db, "users");
-    const q = query(userCollection, where('id', '==', id ? id : useCookie('user_id').value));
+    const userId = id || (import.meta.client ? localStorage.getItem('user_id') : null);
+    const q = query(userCollection, where('id', '==', userId));
     const querySnapshot = (await getDocs(q));
     querySnapshot.docs.map((doc) => {
       const data = doc.data();
       store.setUser(data);
     })
+  };
+
+  // Helper function to get token from localStorage
+  const getToken = (): string | null => {
+    if (import.meta.client) {
+      return localStorage.getItem('token');
+    }
+    return null;
+  };
+
+  // Helper function to get user_id from localStorage
+  const getUserId = (): string | null => {
+    if (import.meta.client) {
+      return localStorage.getItem('user_id');
+    }
+    return null;
+  };
+
+  // Check if user is authenticated
+  const isAuthenticated = (): boolean => {
+    return !!getToken();
   };
 
   return {
@@ -100,5 +136,8 @@ export default function useAuthentication() {
     onSwitch,
     getUserById,
     isLoading,
+    getToken,
+    getUserId,
+    isAuthenticated,
   }
 };
